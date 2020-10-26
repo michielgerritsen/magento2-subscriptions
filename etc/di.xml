@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magmodules.eu. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magmodules\Dummy\Api\Config\RepositoryInterface"
+                type="Magmodules\Dummy\Model\Config\Repository"/>
+    <preference for="Magmodules\Dummy\Api\Log\RepositoryInterface"
+                type="Magmodules\Dummy\Model\Log\Repository"/>
+    <preference for="Magmodules\Dummy\Api\Selftest\RepositoryInterface"
+                type="Magmodules\Dummy\Model\Selftest\Repository"/>
+
+    <preference for="Magmodules\Dummy\Api\DataSample\RepositoryInterface"
+                type="Magmodules\Dummy\Model\DataSample\Repository"/>
+    <preference for="Magmodules\Dummy\Api\DataSample\DataInterface"
+                type="Magmodules\Dummy\Model\DataSample\Data"/>
+    <preference for="Magmodules\Dummy\Api\DataSample\SearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults"/>
+
+    <type name="Magmodules\Dummy\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Magmodules\Dummy\Logger\ErrorLogger">
+        <arguments>
+            <argument name="name" xsi:type="string">DummyError</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Magmodules\Dummy\Logger\Handler\Error</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magmodules\Dummy\Logger\DebugLogger">
+        <arguments>
+            <argument name="name" xsi:type="string">DummyDebug</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Magmodules\Dummy\Logger\Handler\Debug</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magmodules\Dummy\Model\Selftest\Repository">
+        <arguments>
+            <argument name="testList" xsi:type="array">
+                <item name="phpVersion" xsi:type="object">Magmodules\Dummy\Service\Test\PhpVersion</item>
+                <item name="cron" xsi:type="object">Magmodules\Dummy\Service\Test\Cron</item>
+                <item name="extensionStatus" xsi:type="object">Magmodules\Dummy\Service\Test\ExtensionStatus</item>
+                <item name="phpExtensions" xsi:type="object">Magmodules\Dummy\Service\Test\PhpExtensions</item>
+                <item name="magentoVersion" xsi:type="object">Magmodules\Dummy\Service\Test\MagentoVersion</item>
+                <item name="extensionVersion" xsi:type="object">Magmodules\Dummy\Service\Test\ExtensionVersion</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magmodules\Dummy\Console\Command\Selftest">
+        <arguments>
+            <argument name="selftestRepository" xsi:type="object">Magmodules\Dummy\Model\Selftest\Repository\Proxy
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Command line block start -->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="DummySelftest" xsi:type="object">Magmodules\Dummy\Console\Command\Selftest</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Command line block end -->
+
+</config>

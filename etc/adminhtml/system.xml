@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magmodules.eu. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magmodules" translate="label" sortOrder="500" class="magmodules-extensions">
+            <label>Magmodules</label>
+        </tab>
+        <section id="magmodules_dummy" translate="label" type="text" sortOrder="1" showInDefault="1"
+                 showInWebsite="1" showInStore="1">
+            <label>Dummy</label>
+            <tab>magmodules</tab>
+            <resource>Magmodules_Dummy::config</resource>
+            <include path="Magmodules_Dummy::system/branding.xml"/>
+            <include path="Magmodules_Dummy::system/general.xml"/>
+            <include path="Magmodules_Dummy::system/debug.xml"/>
+        </section>
+    </system>
+</config>
