@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Controller\Adminhtml\Log;
+namespace Mollie\Subscriptions\Controller\Adminhtml\Log;
 
 use Exception;
 use Magento\Backend\App\Action;
@@ -17,7 +17,7 @@ use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Filesystem\DirectoryList;
 use Magento\Framework\Filesystem\Driver\File;
 use Magento\Framework\Serialize\Serializer\Json as SerializerJson;
-use Magmodules\Dummy\Api\Config\RepositoryInterface as ConfigRepository;
+use Mollie\Subscriptions\Api\Config\RepositoryInterface as ConfigRepository;
 
 /**
  * Class debug
@@ -30,7 +30,7 @@ class Debug extends Action
     /**
      * Debug log file path pattern
      */
-    const DEBUG_LOG_FILE = '%s/log/dummy/debug.log';
+    const DEBUG_LOG_FILE = '%s/log/mollie-subscriptions/debug.log';
 
     /**
      * @var JsonFactory

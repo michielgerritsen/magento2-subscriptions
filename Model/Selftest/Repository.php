@@ -5,9 +5,9 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Model\Selftest;
+namespace Mollie\Subscriptions\Model\Selftest;
 
-use Magmodules\Dummy\Api\Selftest\RepositoryInterface;
+use Mollie\Subscriptions\Api\Selftest\RepositoryInterface;
 
 /**
  * Selftest repository class

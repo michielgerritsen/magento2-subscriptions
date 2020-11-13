@@ -13,7 +13,7 @@
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">
-                            <resource id="Magmodules_Dummy::config" title="Dummy" sortOrder="10"/>
+                            <resource id="Mollie_Subscriptions::config" title="Mollie Subscriptions" sortOrder="10"/>
                         </resource>
                     </resource>
                 </resource>

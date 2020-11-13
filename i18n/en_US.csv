@@ -5,7 +5,7 @@
 "test passed"                                                                                                            ,"Test Passed"
 "test failed"                                                                                                            ,"Test Failed"
 "Great, you are using the latest version."                                                                               ,"Great, you are using the latest version."
-"There is a new version available <span>(%1)</span> see <button type='button' id='mm-dummy-button_version'>changelog</button>.","There is a new version available <span>(%1)</span> see <button type='button' id='mm-dummy-button_version'>changelog</button>."
+"There is a new version available <span>(%1)</span> see <button type='button' id='mollie-subscriptions-button_version'>changelog</button>.","There is a new version available <span>(%1)</span> see <button type='button' id='mollie-subscriptions-button_version'>changelog</button>."
 "Selftest"                                                                                                               ,"Selftest"
 "Changelog"                                                                                                              ,"Changelog"
 "Show more.","Show more."

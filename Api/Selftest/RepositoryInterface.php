@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Api\Selftest;
+namespace Mollie\Subscriptions\Api\Selftest;
 
 /**
  * Self test repository interface

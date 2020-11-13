@@ -5,9 +5,9 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Console\Command;
+namespace Mollie\Subscriptions\Console\Command;
 
-use Magmodules\Dummy\Api\Selftest\RepositoryInterface
+use Mollie\Subscriptions\Api\Selftest\RepositoryInterface
     as SelftestRepository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,7 +24,7 @@ class Selftest extends Command
     /**
      * Command call name
      */
-    const COMMAND_NAME = 'dummy:selftest';
+    const COMMAND_NAME = 'mollie:subscriptions:selftest';
 
     /**
      * @var SelftestRepository

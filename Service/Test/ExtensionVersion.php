@@ -5,14 +5,14 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Service\Test;
+namespace Mollie\Subscriptions\Service\Test;
 
 use Exception;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Filesystem\Driver\File;
 use Magento\Framework\Serialize\Serializer\Json as JsonSerializer;
-use Magmodules\Dummy\Api\Config\RepositoryInterface as ConfigRepository;
-use Magmodules\Dummy\Api\Log\RepositoryInterface as LogRepository;
+use Mollie\Subscriptions\Api\Config\RepositoryInterface as ConfigRepository;
+use Mollie\Subscriptions\Api\Log\RepositoryInterface as LogRepository;
 
 /**
  * Extension version version test class

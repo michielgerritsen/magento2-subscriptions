@@ -4,21 +4,21 @@
  * See COPYING.txt for license details.
  */
 
-use Magmodules\Dummy\Block\Adminhtml\System\Config\Button\VersionCheck;
+use Mollie\Subscriptions\Block\Adminhtml\System\Config\Button\VersionCheck;
 
 /**
- * @see \Magmodules\Dummy\Block\Adminhtml\System\Config\Button\VersionCheck
+ * @see \Mollie\Subscriptions\Block\Adminhtml\System\Config\Button\VersionCheck
  * @var VersionCheck $block
  */
 ?>
-<div class="mm-dummy-result_version-wrapper"
-     data-mm-dummy-endpoind-url="<?= $block->escapeUrl($block->getVersionCheckUrl()) ?>">
+<div class="mollie-subscriptions-result_version-wrapper"
+     data-mollie-subscriptions-endpoind-url="<?= $block->escapeUrl($block->getVersionCheckUrl()) ?>">
     <span><?= $block->escapeHtml($block->getVersion()); ?></span>
     <?= $block->getButtonHtml() ?>
-    <div id="mm-dummy-result_version"></div>
-    <div id="mm-dummy-result_changelog-modal"
-         data-mm-dummy-endpoind-url="<?= $block->escapeUrl($block->getChangeLogUrl()) ?>">
-        <div id="mm-dummy-result_changelog">
+    <div id="mollie-subscriptions-result_version"></div>
+    <div id="mollie-subscriptions-result_changelog-modal"
+         data-mollie-subscriptions-endpoind-url="<?= $block->escapeUrl($block->getChangeLogUrl()) ?>">
+        <div id="mollie-subscriptions-result_changelog">
             <ul class="result"></ul>
         </div>
     </div>

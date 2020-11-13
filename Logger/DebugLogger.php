@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Logger;
+namespace Mollie\Subscriptions\Logger;
 
 use Magento\Framework\Serialize\Serializer\Json;
 use Monolog\Logger;
@@ -40,7 +40,7 @@ class DebugLogger extends Logger
     }
 
     /**
-     * Add debug data to dummy Log
+     * Add debug data Log
      *
      * @param string $type
      * @param mixed $data

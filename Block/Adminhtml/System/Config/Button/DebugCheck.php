@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Block\Adminhtml\System\Config\Button;
+namespace Mollie\Subscriptions\Block\Adminhtml\System\Config\Button;
 
 use Exception;
 use Magento\Backend\Block\Template\Context;
@@ -23,7 +23,7 @@ class DebugCheck extends Field
     /**
      * @var string
      */
-    protected $_template = 'Magmodules_Dummy::system/config/button/debug.phtml';
+    protected $_template = 'Mollie_Subscriptions::system/config/button/debug.phtml';
 
     /**
      * @var RequestInterface
@@ -70,7 +70,7 @@ class DebugCheck extends Field
      */
     public function getDebugCheckUrl()
     {
-        return $this->getUrl('dummy/log/debug');
+        return $this->getUrl('mollie-subscriptions/log/debug');
     }
 
     /**
@@ -78,7 +78,7 @@ class DebugCheck extends Field
      */
     public function getButtonHtml()
     {
-        $buttonData = ['id' => 'mm-dummy-button_debug', 'label' => __('Check last 100 debug log records')];
+        $buttonData = ['id' => 'mollie-subscriptions-button_debug', 'label' => __('Check last 100 debug log records')];
         try {
             $button = $this->getLayout()->createBlock(
                 Button::class

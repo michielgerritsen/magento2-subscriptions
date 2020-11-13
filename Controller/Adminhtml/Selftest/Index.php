@@ -5,12 +5,12 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Controller\Adminhtml\Selftest;
+namespace Mollie\Subscriptions\Controller\Adminhtml\Selftest;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
-use Magmodules\Dummy\Api\Selftest\RepositoryInterface as SelftestRepository;
+use Mollie\Subscriptions\Api\Selftest\RepositoryInterface as SelftestRepository;
 
 /**
  * Class index

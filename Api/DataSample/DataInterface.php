@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Api\DataSample;
+namespace Mollie\Subscriptions\Api\DataSample;
 
 use Magento\Framework\Api\ExtensibleDataInterface;
 

@@ -6,7 +6,7 @@
 "test passed","test passed"
 "test failed","test failed"
 "Great, you are using the latest version.","Great, you are using the latest version."
-"There is a new version available <span>(%1)</span> see <button type=""button"" id=""mm-dummy-button_changelog"">changelog</button>.","There is a new version available <span>(%1)</span> see <button type=""button"" id=""mm-dummy-button_changelog"">changelog</button>."
+"There is a new version available <span>(%1)</span> see <button type=""button"" id=""mollie-subscriptions-button_changelog"">changelog</button>.","There is a new version available <span>(%1)</span> see <button type=""button"" id=""mollie-subscriptions-button_changelog"">changelog</button>."
 "last 100 debug log lines","last 100 debug log lines"
 "download as .txt file","download as .txt file"
 ok,ok

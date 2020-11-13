@@ -5,11 +5,11 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Model\DataSample;
+namespace Mollie\Subscriptions\Model\DataSample;
 
 use Magento\Framework\Api\ExtensibleDataInterface;
 use Magento\Framework\Model\AbstractModel;
-use Magmodules\Dummy\Api\DataSample\DataInterface;
+use Mollie\Subscriptions\Api\DataSample\DataInterface;
 
 /**
  * Dummy data class

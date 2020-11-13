@@ -5,11 +5,11 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Test\Integration\Model\Test;
+namespace Mollie\Subscriptions\Test\Integration\Model\Test;
 
 use Magento\Framework\App\ObjectManager;
-use Magmodules\Dummy\Api\Config\RepositoryInterface;
-use Magmodules\Dummy\Service\Test\ExtensionStatus;
+use Mollie\Subscriptions\Api\Config\RepositoryInterface;
+use Mollie\Subscriptions\Service\Test\ExtensionStatus;
 use PHPUnit\Framework\TestCase;
 
 class ExtensionStatusTest extends TestCase

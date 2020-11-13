@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Logger\Handler;
+namespace Mollie\Subscriptions\Logger\Handler;
 
 use Magento\Framework\Logger\Handler\Base;
 use Monolog\Logger;
@@ -24,5 +24,5 @@ class Error extends Base
     /**
      * @var string
      */
-    protected $fileName = '/var/log/dummy/error.log';
+    protected $fileName = '/var/log/mollie-subscriptions/error.log';
 }

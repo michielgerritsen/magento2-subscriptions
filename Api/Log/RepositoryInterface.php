@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Api\Log;
+namespace Mollie\Subscriptions\Api\Log;
 
 /**
  * Config repository interface

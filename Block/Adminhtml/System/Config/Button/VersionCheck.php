@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Block\Adminhtml\System\Config\Button;
+namespace Mollie\Subscriptions\Block\Adminhtml\System\Config\Button;
 
 use Exception;
 use Magento\Backend\Block\Template\Context;
@@ -13,7 +13,7 @@ use Magento\Backend\Block\Widget\Button;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use Magmodules\Dummy\Model\Config\Repository as ConfigRepository;
+use Mollie\Subscriptions\Model\Config\Repository as ConfigRepository;
 
 /**
  * Version check button class
@@ -24,7 +24,7 @@ class VersionCheck extends Field
     /**
      * @var string
      */
-    protected $_template = 'Magmodules_Dummy::system/config/button/version.phtml';
+    protected $_template = 'Mollie_Subscriptions::system/config/button/version.phtml';
     /**
      * @var ConfigRepository
      */
@@ -84,7 +84,7 @@ class VersionCheck extends Field
      */
     public function getVersionCheckUrl()
     {
-        return $this->getUrl('dummy/versioncheck/index');
+        return $this->getUrl('mollie-subscriptions/versioncheck/index');
     }
 
     /**
@@ -92,7 +92,7 @@ class VersionCheck extends Field
      */
     public function getChangeLogUrl()
     {
-        return $this->getUrl('dummy/versioncheck/changelog');
+        return $this->getUrl('mollie-subscriptions/versioncheck/changelog');
     }
 
     /**
@@ -100,7 +100,7 @@ class VersionCheck extends Field
      */
     public function getButtonHtml()
     {
-        $buttonData = ['id' => 'mm-dummy-button_version', 'label' => __('Check for latest versions')];
+        $buttonData = ['id' => 'mollie-subscriptions-button_version', 'label' => __('Check for latest versions')];
         try {
             $button = $this->getLayout()->createBlock(
                 Button::class

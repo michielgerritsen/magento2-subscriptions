@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Api\Config;
+namespace Mollie\Subscriptions\Api\Config;
 
 use Magento\Store\Api\Data\StoreInterface;
 
@@ -15,10 +15,10 @@ use Magento\Store\Api\Data\StoreInterface;
 interface RepositoryInterface
 {
 
-    const EXTENSION_CODE = 'Magmodules_Dummy';
-    const XML_PATH_EXTENSION_VERSION = 'magmodules_dummy/general/version';
-    const XML_PATH_EXTENSION_ENABLE = 'magmodules_dummy/general/enable';
-    const XML_PATH_DEBUG = 'magmodules_dummy/general/debug';
+    const EXTENSION_CODE = 'Mollie_Subscriptions';
+    const XML_PATH_EXTENSION_VERSION = 'Mollie_Subscriptions/general/version';
+    const XML_PATH_EXTENSION_ENABLE = 'Mollie_Subscriptions/general/enable';
+    const XML_PATH_DEBUG = 'Mollie_Subscriptions/general/debug';
     const MODULE_SUPPORT_LINK = 'https://www.magmodules.eu/help/%s';
 
     /**

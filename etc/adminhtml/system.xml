@@ -11,14 +11,14 @@
         <tab id="magmodules" translate="label" sortOrder="500" class="magmodules-extensions">
             <label>Magmodules</label>
         </tab>
-        <section id="magmodules_dummy" translate="label" type="text" sortOrder="1" showInDefault="1"
+        <section id="Mollie_Subscriptions" translate="label" type="text" sortOrder="1" showInDefault="1"
                  showInWebsite="1" showInStore="1">
             <label>Dummy</label>
             <tab>magmodules</tab>
-            <resource>Magmodules_Dummy::config</resource>
-            <include path="Magmodules_Dummy::system/branding.xml"/>
-            <include path="Magmodules_Dummy::system/general.xml"/>
-            <include path="Magmodules_Dummy::system/debug.xml"/>
+            <resource>Mollie_Subscriptions::config</resource>
+            <include path="Mollie_Subscriptions::system/branding.xml"/>
+            <include path="Mollie_Subscriptions::system/general.xml"/>
+            <include path="Mollie_Subscriptions::system/debug.xml"/>
         </section>
     </system>
 </config>

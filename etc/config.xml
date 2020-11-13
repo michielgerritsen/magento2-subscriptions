@@ -8,12 +8,12 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
-        <magmodules_dummy>
+        <Mollie_Subscriptions>
             <general>
                 <version>v1.0.0</version>
                 <enable>0</enable>
                 <debug>0</debug>
             </general>
-        </magmodules_dummy>
+        </Mollie_Subscriptions>
     </default>
 </config>

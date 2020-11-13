@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Model\DataSample;
+namespace Mollie\Subscriptions\Model\DataSample;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 

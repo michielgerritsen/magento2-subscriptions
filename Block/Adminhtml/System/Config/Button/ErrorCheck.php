@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Block\Adminhtml\System\Config\Button;
+namespace Mollie\Subscriptions\Block\Adminhtml\System\Config\Button;
 
 use Exception;
 use Magento\Backend\Block\Template\Context;
@@ -24,7 +24,7 @@ class ErrorCheck extends Field
     /**
      * @var string
      */
-    protected $_template = 'Magmodules_Dummy::system/config/button/error.phtml';
+    protected $_template = 'Mollie_Subscriptions::system/config/button/error.phtml';
 
     /**
      * @var RequestInterface
@@ -71,7 +71,7 @@ class ErrorCheck extends Field
      */
     public function getErrorCheckUrl()
     {
-        return $this->getUrl('dummy/log/error');
+        return $this->getUrl('mollie-subscriptions/log/error');
     }
 
     /**
@@ -79,7 +79,7 @@ class ErrorCheck extends Field
      */
     public function getButtonHtml()
     {
-        $buttonData = ['id' => 'mm-dummy-button_error', 'label' => __('Check last 100 error log records')];
+        $buttonData = ['id' => 'mollie-subscriptions-button_error', 'label' => __('Check last 100 error log records')];
         try {
             $button = $this->getLayout()->createBlock(
                 Button::class

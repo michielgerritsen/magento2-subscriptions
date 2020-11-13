@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Block\Adminhtml\System\Config\Button;
+namespace Mollie\Subscriptions\Block\Adminhtml\System\Config\Button;
 
 use Exception;
 use Magento\Backend\Block\Template\Context;
@@ -23,7 +23,7 @@ class Selftest extends Field
     /**
      * @var string
      */
-    protected $_template = 'Magmodules_Dummy::system/config/button/selftest.phtml';
+    protected $_template = 'Mollie_Subscriptions::system/config/button/selftest.phtml';
 
     /**
      * @var RequestInterface
@@ -70,7 +70,7 @@ class Selftest extends Field
      */
     public function getSelftestUrl()
     {
-        return $this->getUrl('dummy/selftest/index');
+        return $this->getUrl('mollie-subscriptions/selftest/index');
     }
 
     /**

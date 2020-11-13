@@ -5,12 +5,12 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Block\Adminhtml\Magmodules;
+namespace Mollie\Subscriptions\Block\Adminhtml\Magmodules;
 
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use Magmodules\Dummy\Api\Config\RepositoryInterface as ConfigRepository;
+use Mollie\Subscriptions\Api\Config\RepositoryInterface as ConfigRepository;
 
 /**
  * System Configration Module information Block
@@ -21,7 +21,7 @@ class Header extends Field
     /**
      * @var string
      */
-    protected $_template = 'Magmodules_Dummy::system/config/fieldset/header.phtml';
+    protected $_template = 'Mollie_Subscriptions::system/config/fieldset/header.phtml';
 
     /**
      * @var ConfigRepository

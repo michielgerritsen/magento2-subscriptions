@@ -28,7 +28,7 @@ require([
             if (Array.isArray(result)) {
 
                 var lisHtml = result.map(function (err) {
-                    return '<li class="mm-dummy-result_debug-item"><strong>' + err.date + '</strong><p>' + err.msg + '</p></li>';
+                    return '<li class="mollie-subscriptions-result_debug-item"><strong>' + err.date + '</strong><p>' + err.msg + '</p></li>';
                 }).join('');
 
                 $container.find('.result').empty().append('<ul>' + lisHtml + '</ul>');
@@ -47,7 +47,7 @@ require([
             if (Array.isArray(result)) {
 
                 var lisHtml = result.map(function (err) {
-                    return '<li class="mm-dummy-result_error-item"><strong>' + err.date + '</strong><p>' + err.msg + '</p></li>';
+                    return '<li class="mollie-subscriptions-result_error-item"><strong>' + err.date + '</strong><p>' + err.msg + '</p></li>';
                 }).join('');
 
                 $container.find('.result').empty().append('<ul>' + lisHtml + '</ul>');
@@ -66,12 +66,12 @@ require([
             var lisHtml = result.map(function (test) {
 
                 var supportLinkHtml = test.support_link ?
-                    '<a target="_blank" href="' + test.support_link + '" class="mm-dummy-icon__help-rounded"></a>' : '';
+                    '<a target="_blank" href="' + test.support_link + '" class="mollie-subscriptions-icon__help-rounded"></a>' : '';
                 var resultText = test.result_code === 'success' ?
                     $.mage.__('Passed') : $.mage.__('Failed');
                 var resultMsg = test.result_code === 'failed' ? test.result_msg : '';
 
-                return '<li class="mm-dummy-result_test-item ' + test.result_code
+                return '<li class="mollie-subscriptions-result_test-item ' + test.result_code
                     + '"><strong>' + resultText + '</strong>'
                     + '<div><p>' + test.test + '</p><p><em>' + resultMsg + '</em></p></div>'
                     + supportLinkHtml + '</li>';
@@ -91,15 +91,15 @@ require([
             var latestVersion = result.last_version.replace(/v|version/gi, '');
 
             if (currentVersion === latestVersion) {
-                resultHtml = '<strong class="mm-dummy-version mm-dummy-icon__thumbs-up">'
+                resultHtml = '<strong class="mollie-subscriptions-version mollie-subscriptions-icon__thumbs-up">'
                     + $.mage.__('Great, you are using the latest version.')
                     + '</strong>';
             } else {
 
-                var translatedResult = $.mage.__('There is a new version available <span>(%1)</span> see <button type="button" id="mm-dummy-button_changelog">changelog</button>.')
+                var translatedResult = $.mage.__('There is a new version available <span>(%1)</span> see <button type="button" id="mollie-subscriptions-button_changelog">changelog</button>.')
                     .replace('%1', latestVersion);
 
-                resultHtml = '<strong class="mm-dummy-version mm-dummy-icon__thumbs-down">'
+                resultHtml = '<strong class="mollie-subscriptions-version mollie-subscriptions-icon__thumbs-down">'
                     + translatedResult
                     + '</strong>';
             }
@@ -119,8 +119,8 @@ require([
                 var date = result[key].date;
                 var resultHtml = result[key].changelog;
 
-                return '<li class="mm-dummy-result_changelog-item"><b>'
-                    + version + '</b><span class="mm-dummy-divider">|</span><b>'
+                return '<li class="mollie-subscriptions-result_changelog-item"><b>'
+                    + version + '</b><span class="mollie-subscriptions-divider">|</span><b>'
                     + date + '</b><div>'
                     + resultHtml + '</div></li>';
             }).join('');
@@ -130,7 +130,7 @@ require([
     }
 
     // init debug modal
-    initModal('#mm-dummy-result_debug-modal', {
+    initModal('#mollie-subscriptions-result_debug-modal', {
         type: 'popup',
         responsive: true,
         innerScroll: true,
@@ -138,10 +138,10 @@ require([
         buttons: [
             {
                 text: $.mage.__('download as .txt file'),
-                class: 'mm-dummy-button__download mm-dummy-icon__download-alt',
+                class: 'mollie-subscriptions-button__download mollie-subscriptions-icon__download-alt',
                 click: function () {
 
-                    var elText = document.getElementById('mm-dummy-result_debug').innerText || '';
+                    var elText = document.getElementById('mollie-subscriptions-result_debug').innerText || '';
                     var link = document.createElement('a');
 
                     link.setAttribute('download', 'debug-log.txt');
@@ -160,7 +160,7 @@ require([
     });
 
     // init error modal
-    initModal('#mm-dummy-result_error-modal', {
+    initModal('#mollie-subscriptions-result_error-modal', {
         type: 'popup',
         responsive: true,
         innerScroll: true,
@@ -168,10 +168,10 @@ require([
         buttons: [
             {
                 text: $.mage.__('download as .txt file'),
-                class: 'mm-dummy-button__download mm-dummy-icon__download-alt',
+                class: 'mollie-subscriptions-button__download mollie-subscriptions-icon__download-alt',
                 click: function () {
 
-                    var elText = document.getElementById('mm-dummy-result_error').innerText || '';
+                    var elText = document.getElementById('mollie-subscriptions-result_error').innerText || '';
                     var link = document.createElement('a');
 
                     link.setAttribute('download', 'error-log.txt');
@@ -190,7 +190,7 @@ require([
     });
 
     // init selftest modal
-    initModal('#mm-dummy-result_test-modal', {
+    initModal('#mollie-subscriptions-result_test-modal', {
         type: 'popup',
         responsive: true,
         innerScroll: true,
@@ -207,7 +207,7 @@ require([
     });
 
     // init changelog modal
-    initModal('#mm-dummy-result_changelog-modal', {
+    initModal('#mollie-subscriptions-result_changelog-modal', {
         type: 'popup',
         responsive: true,
         innerScroll: true,
@@ -224,19 +224,19 @@ require([
     });
 
     // init loader on the Check Version block
-    $('.mm-dummy-result_version-wrapper').loader({texts: ''});
+    $('.mollie-subscriptions-result_version-wrapper').loader({texts: ''});
 
     /**
      * Ajax request event
      */
-    $(document).on('click', '[id^=mm-dummy-button]', function () {
+    $(document).on('click', '[id^=mollie-subscriptions-button]', function () {
         var actionName = this.id.split('_')[1];
-        var $modal = $('#mm-dummy-result_' + actionName + '-modal');
-        var $result = $('#mm-dummy-result_' + actionName);
+        var $modal = $('#mollie-subscriptions-result_' + actionName + '-modal');
+        var $result = $('#mollie-subscriptions-result_' + actionName);
 
         if (actionName === 'version') {
-            $(this).fadeOut(300).addClass('mm-dummy-disabled');
-            $modal = $('.mm-dummy-result_' + actionName + '-wrapper');
+            $(this).fadeOut(300).addClass('mollie-subscriptions-disabled');
+            $modal = $('.mollie-subscriptions-result_' + actionName + '-wrapper');
             $modal.loader('show');
         } else {
             $modal.modal('openModal').loader('show');
@@ -244,7 +244,7 @@ require([
 
         $result.hide();
 
-        new Ajax.Request($modal.data('mm-dummy-endpoind-url'), {
+        new Ajax.Request($modal.data('mollie-subscriptions-endpoind-url'), {
             loaderArea: false,
             asynchronous: true,
             onSuccess: function (response) {

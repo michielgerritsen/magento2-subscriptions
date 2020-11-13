@@ -5,9 +5,9 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Service\Test;
+namespace Mollie\Subscriptions\Service\Test;
 
-use Magmodules\Dummy\Api\Config\RepositoryInterface as ConfigRepository;
+use Mollie\Subscriptions\Api\Config\RepositoryInterface as ConfigRepository;
 
 /**
  * Magento version test class

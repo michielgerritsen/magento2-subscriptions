@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Controller\Adminhtml\VersionCheck;
+namespace Mollie\Subscriptions\Controller\Adminhtml\VersionCheck;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\App\ResponseInterface;
@@ -15,7 +15,7 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Filesystem\Driver\File;
 use Magento\Framework\Serialize\Serializer\Json as JsonSerializer;
-use Magmodules\Dummy\Api\Config\RepositoryInterface as ConfigRepository;
+use Mollie\Subscriptions\Api\Config\RepositoryInterface as ConfigRepository;
 
 /**
  * Class Changelog

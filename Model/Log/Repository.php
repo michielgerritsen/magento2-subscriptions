@@ -5,11 +5,11 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Model\Log;
+namespace Mollie\Subscriptions\Model\Log;
 
-use Magmodules\Dummy\Api\Log\RepositoryInterface as LogRepositoryInterface;
-use Magmodules\Dummy\Logger\DebugLogger;
-use Magmodules\Dummy\Logger\ErrorLogger;
+use Mollie\Subscriptions\Api\Log\RepositoryInterface as LogRepositoryInterface;
+use Mollie\Subscriptions\Logger\DebugLogger;
+use Mollie\Subscriptions\Logger\ErrorLogger;
 
 /**
  * Logs repository class

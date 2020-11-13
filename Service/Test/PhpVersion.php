@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Service\Test;
+namespace Mollie\Subscriptions\Service\Test;
 
 /**
  * PHP test class

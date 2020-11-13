@@ -4,6 +4,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(
     ComponentRegistrar::MODULE,
-    'Magmodules_Dummy',
+    'Mollie_Subscriptions',
     __DIR__
 );

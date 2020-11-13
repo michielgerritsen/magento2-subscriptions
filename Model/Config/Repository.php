@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Model\Config;
+namespace Mollie\Subscriptions\Model\Config;
 
 use Exception;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -14,7 +14,7 @@ use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use Magmodules\Dummy\Api\Config\RepositoryInterface as ConfigRepositoryInterface;
+use Mollie\Subscriptions\Api\Config\RepositoryInterface as ConfigRepositoryInterface;
 
 /**
  * Config repository class

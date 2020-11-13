@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Model\DataSample;
+namespace Mollie\Subscriptions\Model\DataSample;
 
 use Exception;
 use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
@@ -15,11 +15,11 @@ use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magmodules\Dummy\Api\DataSample\DataInterface;
-use Magmodules\Dummy\Api\DataSample\DataInterfaceFactory;
-use Magmodules\Dummy\Api\DataSample\RepositoryInterface;
-use Magmodules\Dummy\Api\DataSample\SearchResultsInterface;
-use Magmodules\Dummy\Api\DataSample\SearchResultsInterfaceFactory;
+use Mollie\Subscriptions\Api\DataSample\DataInterface;
+use Mollie\Subscriptions\Api\DataSample\DataInterfaceFactory;
+use Mollie\Subscriptions\Api\DataSample\RepositoryInterface;
+use Mollie\Subscriptions\Api\DataSample\SearchResultsInterface;
+use Mollie\Subscriptions\Api\DataSample\SearchResultsInterfaceFactory;
 
 /**
  * DataSample repository class

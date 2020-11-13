@@ -1,13 +1,14 @@
 {
-    "name": "magmodules/magento2-dummy",
-    "description": "Dummy extension for Magento 2",
+    "name": "mollie/magento2-subscriptions",
+    "description": "Mollie subscriptions extension for Magento 2",
     "type": "magento2-module",
     "version": "1.0.0",
     "license": [
         "Commercial"
     ],
     "require": {
-        "magento/framework": ">=100.1.0"
+        "magento/framework": ">=100.1.0",
+        "mollie/magento2": ">=1.17"
     },
     "require-dev": {
         "phpstan/phpstan": "*"
@@ -17,7 +18,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Magmodules\\Dummy\\": ""
+            "Mollie\\Subscriptions\\": ""
         }
     }
 }

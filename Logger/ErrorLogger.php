@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magmodules\Dummy\Logger;
+namespace Mollie\Subscriptions\Logger;
 
 use Magento\Framework\Serialize\Serializer\Json;
 use Monolog\Logger;
