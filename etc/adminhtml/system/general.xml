@@ -19,7 +19,16 @@
                showInStore="1">
             <label>Enabled</label>
             <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-            <config_path>Mollie_Subscriptions/general/enable</config_path>
+            <config_path>mollie_subscriptions/general/enable</config_path>
+        </field>
+        <field id="apikey" translate="label" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1"
+               showInStore="1">
+            <label>API Key</label>
+            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+            <config_path>mollie_subscriptions/general/apikey</config_path>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
         </field>
     </group>
 </include>

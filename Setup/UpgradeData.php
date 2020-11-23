@@ -7,13 +7,11 @@
 namespace Mollie\Subscriptions\Setup;
 
 use Magento\Catalog\Model\Product;
-use Magento\Config\Model\Config\Backend\Serialized\ArraySerialized;
 use Magento\Eav\Setup\EavSetup;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\UpgradeDataInterface;
-use Mollie\Subscriptions\Block\Adminhtml\Product\Attribute\Frontend\SubscriptionProducts;
 
 class UpgradeData implements UpgradeDataInterface
 {
@@ -53,8 +51,6 @@ class UpgradeData implements UpgradeDataInterface
                 'type' => 'text',
                 'label' => 'Subscription product',
                 'input' => 'text',
-//                'frontend' => SubscriptionProducts::class,
-//                'backend' => ArraySerialized::class,
                 'required' => false,
                 'sort_order' => 10,
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
@@ -63,7 +59,7 @@ class UpgradeData implements UpgradeDataInterface
                 'is_filterable_in_grid' => false,
                 'visible' => true,
                 'is_html_allowed_on_front' => false,
-                'visible_on_front' => true
+                'visible_on_front' => false
             ]
         );
     }

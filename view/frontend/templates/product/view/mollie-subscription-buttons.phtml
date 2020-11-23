@@ -1,0 +1,21 @@
+<?php
+/*
+ * Copyright Magmodules.eu. All rights reserved.
+ *  See COPYING.txt for license details.
+ */
+
+/** @var \Mollie\Subscriptions\Block\Frontend\Product\View\SubscriptionProductButtons $block */
+?>
+
+<input type="hidden" id="mollie_subscriptions_product_id" name="mollie_subscriptions_product_id" value="" />
+
+<?php foreach ($block->getSubscriptionProducts() as $product): ?>
+    <?php $label = __('Add %1 to cart', $product->getLabel()); ?>
+    <button type="submit"
+            onclick="document.getElementById('mollie_subscriptions_product_id').value = this.value"
+            value="<?php echo $product->getId(); ?>"
+            title="<?= $block->escapeHtmlAttr($label) ?>"
+            class="action primary tocart">
+        <span><?= $block->escapeHtml($label) ?></span>
+    </button>
+<?php endforeach; ?>

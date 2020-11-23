@@ -10,7 +10,7 @@ namespace Mollie\Subscriptions\Block\Adminhtml\Magmodules;
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use Mollie\Subscriptions\Api\Config\RepositoryInterface as ConfigRepository;
+use Mollie\Subscriptions\Config;
 
 /**
  * System Configration Module information Block
@@ -24,21 +24,21 @@ class Header extends Field
     protected $_template = 'Mollie_Subscriptions::system/config/fieldset/header.phtml';
 
     /**
-     * @var ConfigRepository
+     * @var Config
      */
-    private $configRepository;
+    private $config;
 
     /**
      * Header constructor.
      *
      * @param Context $context
-     * @param ConfigRepository $config
+     * @param Config $config
      */
     public function __construct(
         Context $context,
-        ConfigRepository $config
+        Config $config
     ) {
-        $this->configRepository = $config;
+        $this->config = $config;
         parent::__construct($context);
     }
 
@@ -63,9 +63,9 @@ class Header extends Field
     {
         return sprintf(
             'https://www.magmodules.eu/logo/%s/%s/%s/logo.png',
-            $this->configRepository->getExtensionCode(),
-            $this->configRepository->getExtensionVersion(),
-            $this->configRepository->getMagentoVersion()
+            $this->config->getExtensionCode(),
+            $this->config->getExtensionVersion(),
+            $this->config->getMagentoVersion()
         );
     }
 
@@ -76,6 +76,6 @@ class Header extends Field
      */
     public function getSupportLink(): string
     {
-        return $this->configRepository->getSupportLink();
+        return $this->config->getSupportLink();
     }
 }

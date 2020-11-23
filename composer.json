@@ -8,7 +8,9 @@
     ],
     "require": {
         "magento/framework": ">=100.1.0",
-        "mollie/magento2": ">=1.17"
+        "mollie/magento2": ">=1.18.1",
+        "beberlei/assert": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "phpstan/phpstan": "*"

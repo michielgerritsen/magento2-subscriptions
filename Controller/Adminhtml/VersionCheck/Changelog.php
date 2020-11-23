@@ -15,7 +15,7 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Filesystem\Driver\File;
 use Magento\Framework\Serialize\Serializer\Json as JsonSerializer;
-use Mollie\Subscriptions\Api\Config\RepositoryInterface as ConfigRepository;
+use Mollie\Subscriptions\Config;
 
 /**
  * Class Changelog
@@ -31,9 +31,9 @@ class Changelog extends Action
     private $resultJsonFactory;
 
     /**
-     * @var ConfigRepository
+     * @var Config
      */
-    private $configRepository;
+    private $config;
 
     /**
      * @var JsonSerializer
@@ -50,19 +50,19 @@ class Changelog extends Action
      *
      * @param Action\Context $context
      * @param JsonFactory $resultJsonFactory
-     * @param ConfigRepository $configRepository
+     * @param Config $config
      * @param JsonSerializer $json
      * @param File $file
      */
     public function __construct(
         Action\Context $context,
         JsonFactory $resultJsonFactory,
-        ConfigRepository $configRepository,
+        Config $config,
         JsonSerializer $json,
         File $file
     ) {
         $this->resultJsonFactory = $resultJsonFactory;
-        $this->configRepository = $configRepository;
+        $this->config = $config;
         $this->json = $json;
         $this->file = $file;
         parent::__construct($context);
@@ -87,7 +87,7 @@ class Changelog extends Action
     private function getVersions(): string
     {
         return $this->file->fileGetContents(
-            sprintf('http://version.magmodules.eu/%s.json', ConfigRepository::EXTENSION_CODE)
+            sprintf('http://version.magmodules.eu/%s.json', Config::EXTENSION_CODE)
         );
     }
 }

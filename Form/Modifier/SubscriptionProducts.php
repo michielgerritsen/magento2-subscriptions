@@ -9,8 +9,10 @@ namespace Mollie\Subscriptions\Form\Modifier;
 use Magento\Catalog\Model\Locator\LocatorInterface;
 use Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\AbstractModifier;
 use Magento\Framework\Stdlib\ArrayManager;
-use Mollie\Payment\Helper\General;
+use Magento\Store\Model\StoreManagerInterface;
 use Mollie\Payment\Model\Mollie;
+use Mollie\Subscriptions\DTO\SubscriptionPlan;
+use Mollie\Subscriptions\Service\EcurringApi;
 
 class SubscriptionProducts extends AbstractModifier
 {
@@ -25,18 +27,25 @@ class SubscriptionProducts extends AbstractModifier
     private $locator;
 
     /**
-     * @var General
+     * @var EcurringApi
      */
-    private $mollieHelper;
+    private $ecurringApi;
+
+    /**
+     * @var StoreManagerInterface
+     */
+    private $storeManager;
 
     public function __construct(
         ArrayManager $arrayManager,
         LocatorInterface $locator,
-        General $mollieHelper
+        EcurringApi $ecurringApi,
+        StoreManagerInterface $storeManager
     ) {
         $this->arrayManager = $arrayManager;
         $this->locator = $locator;
-        $this->mollieHelper = $mollieHelper;
+        $this->ecurringApi = $ecurringApi;
+        $this->storeManager = $storeManager;
     }
 
     public function modifyMeta(array $meta)
@@ -47,9 +56,7 @@ class SubscriptionProducts extends AbstractModifier
             [
                 'component' => 'Mollie_Subscriptions/js/view/product/input/map-ecurring-to-product',
                 'template' => 'Mollie_Subscriptions/view/product/input/map-ecurring-to-product',
-                'options' => [
-                    $this->getOptions()
-                ],
+                'options' => $this->getOptions(),
             ]
         );
     }
@@ -64,16 +71,13 @@ class SubscriptionProducts extends AbstractModifier
 
     public function getOptions()
     {
-        $result = file_get_contents('https://api.ecurring.com/subscription-plans', false, stream_context_create([
-            'http' => [
-                'method' => 'GET',
-                'header' => 'Authorization: Bearer ' . '// TODO',
-            ]
-        ]));
+        $plans = $this->ecurringApi->getSubscriptionPlans($this->storeManager->getStore()->getId());
 
-        var_dump($result);
-        exit;
-        $api = $this->mollieModel->getMollieApi();
-//        $api->subscriptions
+        return array_map(function (SubscriptionPlan $plan) {
+            return [
+                'label' => $plan->getName(),
+                'value' => $plan->getId(),
+            ];
+        }, $plans->getSubscriptionPlans());
     }
 }

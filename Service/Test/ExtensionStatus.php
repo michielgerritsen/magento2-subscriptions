@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Mollie\Subscriptions\Service\Test;
 
-use Mollie\Subscriptions\Api\Config\RepositoryInterface as ConfigRepository;
+use Mollie\Subscriptions\Config;
 
 /**
  * Extension status test class
@@ -46,19 +46,19 @@ class ExtensionStatus
     const EXPECTED = true;
 
     /**
-     * @var ConfigRepository
+     * @var Config
      */
-    private $configRepository;
+    private $config;
 
     /**
      * Repository constructor.
      *
-     * @param ConfigRepository $configRepository
+     * @param Config $config
      */
     public function __construct(
-        ConfigRepository $configRepository
+        Config $config
     ) {
-        $this->configRepository = $configRepository;
+        $this->config = $config;
     }
 
     /**
@@ -72,7 +72,7 @@ class ExtensionStatus
             'visible' => self::VISIBLE
         ];
 
-        if ($this->configRepository->isEnabled() == self::EXPECTED) {
+        if ($this->config->isEnabled() == self::EXPECTED) {
             $result['result_msg'] = self::SUCCESS_MSG;
             $result +=
                 [

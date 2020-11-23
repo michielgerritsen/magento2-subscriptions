@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Mollie\Subscriptions\Service\Test;
 
-use Mollie\Subscriptions\Api\Config\RepositoryInterface as ConfigRepository;
+use Mollie\Subscriptions\Config;
 
 /**
  * Magento version test class
@@ -51,19 +51,14 @@ class MagentoVersion
     const EXPECTED = '2.3';
 
     /**
-     * @var ConfigRepository
+     * @var Config
      */
-    private $configRepository;
+    private $config;
 
-    /**
-     * Repository constructor.
-     *
-     * @param ConfigRepository $configRepository
-     */
     public function __construct(
-        ConfigRepository $configRepository
+        Config $config
     ) {
-        $this->configRepository = $configRepository;
+        $this->config = $config;
     }
 
     /**
@@ -77,7 +72,7 @@ class MagentoVersion
             'visible' => self::VISIBLE,
 
         ];
-        $magentoVersion = $this->configRepository->getMagentoVersion();
+        $magentoVersion = $this->config->getMagentoVersion();
         if (version_compare(self::EXPECTED, $magentoVersion) <= 0) {
             $result['result_msg'] = self::SUCCESS_MSG;
             $result +=

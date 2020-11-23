@@ -15,7 +15,7 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Filesystem\Driver\File;
 use Magento\Framework\Serialize\Serializer\Json as JsonSerializer;
-use Mollie\Subscriptions\Api\Config\RepositoryInterface as ConfigRepository;
+use Mollie\Subscriptions\Config;
 
 /**
  * Class index
@@ -31,9 +31,9 @@ class Index extends Action
     private $resultJsonFactory;
 
     /**
-     * @var ConfigRepository
+     * @var Config
      */
-    private $configRepository;
+    private $config;
 
     /**
      * @var JsonSerializer
@@ -50,19 +50,19 @@ class Index extends Action
      *
      * @param Action\Context $context
      * @param JsonFactory $resultJsonFactory
-     * @param ConfigRepository $configRepository
+     * @param Config $config
      * @param JsonSerializer $json
      * @param File $file
      */
     public function __construct(
         Action\Context $context,
         JsonFactory $resultJsonFactory,
-        ConfigRepository $configRepository,
+        Config $config,
         JsonSerializer $json,
         File $file
     ) {
         $this->resultJsonFactory = $resultJsonFactory;
-        $this->configRepository = $configRepository;
+        $this->config = $config;
         $this->json = $json;
         $this->file = $file;
         parent::__construct($context);
@@ -75,14 +75,14 @@ class Index extends Action
     {
         $resultJson = $this->resultJsonFactory->create();
         $result = $this->getVersions();
-        $current = $latest = $this->configRepository->getExtensionVersion();
+        $current = $latest = $this->config->getExtensionVersion();
         $changeLog = [];
         if ($result) {
             $data = $this->json->unserialize($result);
             $versions = array_keys($data);
             $latest = reset($versions);
             foreach ($data as $version => $changes) {
-                if ('v' . $version == $this->configRepository->getExtensionVersion()) {
+                if ('v' . $version == $this->config->getExtensionVersion()) {
                     break;
                 }
                 $changeLog[] = [
@@ -105,7 +105,7 @@ class Index extends Action
     {
         try {
             return $this->file->fileGetContents(
-                sprintf('http://version.magmodules.eu/%s.json', ConfigRepository::EXTENSION_CODE)
+                sprintf('http://version.magmodules.eu/%s.json', Config::EXTENSION_CODE)
             );
         } catch (\Exception $exception) {
             return '';

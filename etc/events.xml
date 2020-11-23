@@ -8,4 +8,7 @@
     <event name="catalog_product_save_after">
         <observer name="mollie_subscriptions_save_subscriptions_to_product" instance="Mollie\Subscriptions\Observer\CatalogProductSaveAfter\SaveSubscriptionToProduct"/>
     </event>
+    <event name="checkout_cart_product_add_after">
+        <observer name="mollie_save_selected_subscription" instance="Mollie\Subscriptions\Observer\CheckoutCartProductAddAfter\SaveSelectedSubscription" />
+    </event>
 </config>

@@ -7,7 +7,6 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Mollie\Subscriptions\Api\Config\RepositoryInterface" type="Mollie\Subscriptions\Model\Config\Repository"/>
     <preference for="Mollie\Subscriptions\Api\Log\RepositoryInterface" type="Mollie\Subscriptions\Model\Log\Repository"/>
     <preference for="Mollie\Subscriptions\Api\Selftest\RepositoryInterface" type="Mollie\Subscriptions\Model\Selftest\Repository"/>
 
@@ -18,6 +17,8 @@
     <preference for="Mollie\Subscriptions\Api\SubscriptionToProductRepositoryInterface" type="Mollie\Subscriptions\Model\SubscriptionToProductRepository"/>
     <preference for="Mollie\Subscriptions\Api\Data\SubscriptionToProductInterface" type="Mollie\Subscriptions\Model\Data\SubscriptionToProduct"/>
     <preference for="Mollie\Subscriptions\Api\Data\SubscriptionToProductSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <preference for="Mollie\Subscriptions\Api\Data\SubscriptionCartItemInterface" type="Mollie\Subscriptions\DTO\SubscriptionCartItem" />
 
     <type name="Mollie\Subscriptions\Logger\Handler">
         <arguments>

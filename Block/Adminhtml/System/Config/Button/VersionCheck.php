@@ -13,7 +13,7 @@ use Magento\Backend\Block\Widget\Button;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use Mollie\Subscriptions\Model\Config\Repository as ConfigRepository;
+use Mollie\Subscriptions\Config;
 
 /**
  * Version check button class
@@ -26,9 +26,9 @@ class VersionCheck extends Field
      */
     protected $_template = 'Mollie_Subscriptions::system/config/button/version.phtml';
     /**
-     * @var ConfigRepository
+     * @var Config
      */
-    private $configRepository;
+    private $config;
     /**
      * @var RequestInterface
      */
@@ -37,15 +37,15 @@ class VersionCheck extends Field
     /**
      * VersionCheck constructor.
      * @param Context $context
-     * @param ConfigRepository $configRepository
+     * @param Config $config
      * @param array $data
      */
     public function __construct(
         Context $context,
-        ConfigRepository $configRepository,
+        Config $config,
         array $data = []
     ) {
-        $this->configRepository = $configRepository;
+        $this->config = $config;
         $this->request = $context->getRequest();
         parent::__construct($context, $data);
     }
@@ -55,7 +55,7 @@ class VersionCheck extends Field
      */
     public function getVersion()
     {
-        return $this->configRepository->getExtensionVersion();
+        return $this->config->getExtensionVersion();
     }
 
     /**

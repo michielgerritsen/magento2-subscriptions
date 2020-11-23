@@ -17,7 +17,7 @@ use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Filesystem\DirectoryList;
 use Magento\Framework\Filesystem\Driver\File;
 use Magento\Framework\Serialize\Serializer\Json as SerializerJson;
-use Mollie\Subscriptions\Api\Config\RepositoryInterface as ConfigRepository;
+use Mollie\Subscriptions\Config;
 
 /**
  * Class error
@@ -36,9 +36,9 @@ class Error extends Action
      */
     private $resultJsonFactory;
     /**
-     * @var ConfigRepository
+     * @var Config
      */
-    private $configRepository;
+    private $config;
     /**
      * @var DirectoryList
      */
@@ -57,7 +57,7 @@ class Error extends Action
      *
      * @param Action\Context $context
      * @param JsonFactory $resultJsonFactory
-     * @param ConfigRepository $configRepository
+     * @param Config $config
      * @param DirectoryList $dir
      * @param File $file
      * @param SerializerJson $serializerJson
@@ -65,13 +65,13 @@ class Error extends Action
     public function __construct(
         Action\Context $context,
         JsonFactory $resultJsonFactory,
-        ConfigRepository $configRepository,
+        Config $config,
         DirectoryList $dir,
         File $file,
         SerializerJson $serializerJson
     ) {
         $this->resultJsonFactory = $resultJsonFactory;
-        $this->configRepository = $configRepository;
+        $this->config = $config;
         $this->dir = $dir;
         $this->file = $file;
         $this->serializerJson = $serializerJson;

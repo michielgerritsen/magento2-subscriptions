@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Mollie\Subscriptions\Test\Integration\Model\Test;
 
 use Magento\Framework\App\ObjectManager;
-use Mollie\Subscriptions\Api\Config\RepositoryInterface;
+use Mollie\Subscriptions\Config;
 use Mollie\Subscriptions\Service\Test\ExtensionStatus;
 use PHPUnit\Framework\TestCase;
 
@@ -21,12 +21,12 @@ class ExtensionStatusTest extends TestCase
 
     public function testReturnsErrorWhenTheModuleIsDisabled()
     {
-        $configRepositoryMock = $this->createMock(RepositoryInterface::class);
-        $configRepositoryMock->method('isEnabled')->willReturn(false);
+        $configMock = $this->createMock(Config::class);
+        $configMock->method('isEnabled')->willReturn(false);
 
         /** @var ExtensionStatus $instance */
         $instance = $this->objectManager->create(ExtensionStatus::class, [
-            'configRepository' => $configRepositoryMock,
+            'config' => $configMock,
         ]);
 
         $result = $instance->execute();
@@ -36,12 +36,12 @@ class ExtensionStatusTest extends TestCase
 
     public function testReturnsSuccessWhenTheModuleIsEnabled()
     {
-        $configRepositoryMock = $this->createMock(RepositoryInterface::class);
-        $configRepositoryMock->method('isEnabled')->willReturn(true);
+        $configMock = $this->createMock(Config::class);
+        $configMock->method('isEnabled')->willReturn(true);
 
         /** @var ExtensionStatus $instance */
         $instance = $this->objectManager->create(ExtensionStatus::class, [
-            'configRepository' => $configRepositoryMock,
+            'config' => $configMock,
         ]);
 
         $result = $instance->execute();

@@ -1,26 +1,30 @@
 <?php
-/**
- * Copyright © Magmodules.eu. All rights reserved.
- * See COPYING.txt for license details.
+/*
+ * Copyright Magmodules.eu. All rights reserved.
+ *  See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
-namespace Mollie\Subscriptions\Model\Config;
+namespace Mollie\Subscriptions;
 
 use Exception;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\ProductMetadataInterface;
-use Magento\Framework\Serialize\Serializer\Json;
+use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use Mollie\Subscriptions\Api\Config\RepositoryInterface as ConfigRepositoryInterface;
 
 /**
  * Config repository class
  */
-class Repository implements ConfigRepositoryInterface
+class Config
 {
+    const EXTENSION_CODE = 'Mollie_Subscriptions';
+    const XML_PATH_EXTENSION_VERSION = 'Mollie_Subscriptions/general/version';
+    const XML_PATH_EXTENSION_ENABLE = 'Mollie_Subscriptions/general/enable';
+    const XML_PATH_DEBUG = 'Mollie_Subscriptions/general/debug';
+    const MODULE_SUPPORT_LINK = 'https://www.magmodules.eu/help/%s';
 
     /**
      * @var StoreManagerInterface
@@ -33,33 +37,25 @@ class Repository implements ConfigRepositoryInterface
     private $scopeConfig;
 
     /**
-     * @var Json
-     */
-    private $json;
-
-    /**
      * @var ProductMetadataInterface
      */
     private $metadata;
 
     /**
-     * Repository constructor.
-     *
-     * @param StoreManagerInterface $storeManager
-     * @param ScopeConfigInterface $scopeConfig
-     * @param Json $json
-     * @param ProductMetadataInterface $metadata
+     * @var EncryptorInterface
      */
+    private $encryptor;
+
     public function __construct(
         StoreManagerInterface $storeManager,
         ScopeConfigInterface $scopeConfig,
-        Json $json,
-        ProductMetadataInterface $metadata
+        ProductMetadataInterface $metadata,
+        EncryptorInterface $encryptor
     ) {
         $this->storeManager = $storeManager;
         $this->scopeConfig = $scopeConfig;
-        $this->json = $json;
         $this->metadata = $metadata;
+        $this->encryptor = $encryptor;
     }
 
     /**
@@ -81,7 +77,7 @@ class Repository implements ConfigRepositoryInterface
      */
     private function getStoreValue(
         string $path,
-        int $storeId = null,
+        $storeId = null,
         string $scope = null
     ): string {
         if (!$storeId) {
@@ -161,6 +157,13 @@ class Repository implements ConfigRepositoryInterface
     public function isEnabled(int $storeId = null): bool
     {
         return $this->getFlag(self::XML_PATH_EXTENSION_ENABLE, $storeId);
+    }
+
+    public function getApiKey($storeId = null)
+    {
+        $value = $this->getStoreValue('mollie_subscriptions/general/apikey', $storeId);
+
+        return $this->encryptor->decrypt($value);
     }
 
     /**

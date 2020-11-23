@@ -11,7 +11,7 @@ use Exception;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Filesystem\Driver\File;
 use Magento\Framework\Serialize\Serializer\Json as JsonSerializer;
-use Mollie\Subscriptions\Api\Config\RepositoryInterface as ConfigRepository;
+use Mollie\Subscriptions\Config;
 use Mollie\Subscriptions\Api\Log\RepositoryInterface as LogRepository;
 
 /**
@@ -61,9 +61,9 @@ class ExtensionVersion
     private $resultJsonFactory;
 
     /**
-     * @var ConfigRepository
+     * @var Config
      */
-    private $configRepository;
+    private $config;
 
     /**
      * @var JsonSerializer
@@ -84,20 +84,20 @@ class ExtensionVersion
      * ExtensionVersion constructor.
      *
      * @param JsonFactory $resultJsonFactory
-     * @param ConfigRepository $configRepository
+     * @param Config $config
      * @param LogRepository $logRepository
      * @param JsonSerializer $json
      * @param File $file
      */
     public function __construct(
         JsonFactory $resultJsonFactory,
-        ConfigRepository $configRepository,
+        Config $config,
         LogRepository $logRepository,
         JsonSerializer $json,
         File $file
     ) {
         $this->resultJsonFactory = $resultJsonFactory;
-        $this->configRepository = $configRepository;
+        $this->config = $config;
         $this->logRepository = $logRepository;
         $this->json = $json;
         $this->file = $file;
@@ -113,10 +113,10 @@ class ExtensionVersion
             'test' => self::TEST,
             'visible' => self::VISIBLE
         ];
-        $extensionVersion = $this->configRepository->getExtensionVersion();
+        $extensionVersion = $this->config->getExtensionVersion();
         try {
             $data = $this->file->fileGetContents(
-                sprintf('http://version.magmodules.eu/%s.json', ConfigRepository::EXTENSION_CODE)
+                sprintf('http://version.magmodules.eu/%s.json', Config::EXTENSION_CODE)
             );
         } catch (Exception $e) {
             $this->logRepository->addDebugLog('Extension version test', $e->getMessage());
