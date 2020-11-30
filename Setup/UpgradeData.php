@@ -43,6 +43,12 @@ class UpgradeData implements UpgradeDataInterface
     private function addProductAttribute(ModuleDataSetupInterface $setup, EavSetup $eavSetup)
     {
         $eavSetup = $this->eavSetupFactory->create();
+
+        // Already exists
+        if ($eavSetup->getAttribute(Product::ENTITY, 'mollie_subscription_product')) {
+            return;
+        }
+
         $eavSetup->addAttribute(
             Product::ENTITY,
             'mollie_subscription_product',

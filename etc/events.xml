@@ -11,4 +11,7 @@
     <event name="checkout_cart_product_add_after">
         <observer name="mollie_save_selected_subscription" instance="Mollie\Subscriptions\Observer\CheckoutCartProductAddAfter\SaveSelectedSubscription" />
     </event>
+    <event name="catalog_product_type_prepare_full_options">
+        <observer name="mollie_add_subscription_to_options" instance="Mollie\Subscriptions\Observer\CatalogProductTypePrepareFullOptions\AddSubscriptionToProductOptions" />
+    </event>
 </config>

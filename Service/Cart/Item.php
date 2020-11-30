@@ -6,6 +6,7 @@
 
 namespace Mollie\Subscriptions\Service\Cart;
 
+use Magento\Quote\Api\CartItemRepositoryInterface;
 use Magento\Quote\Api\Data\CartExtensionInterfaceFactory;
 use Magento\Quote\Api\Data\CartItemInterface;
 use Mollie\Subscriptions\Api\Data\SubscriptionCartItemInterface;
@@ -20,6 +21,11 @@ class Item
     private $subscriptionItem;
 
     /**
+     * @var CartItemRepositoryInterface
+     */
+    private $cartItemRepository;
+
+    /**
      * @var CartExtensionInterfaceFactory
      */
     private $cartExtensionFactory;
@@ -31,10 +37,12 @@ class Item
 
     public function __construct(
         CartExtensionInterfaceFactory $cartExtensionFactory,
+        CartItemRepositoryInterface $cartItemRepository,
         SubscriptionCartItemInterfaceFactory $subscriptionItem,
         EcurringApi $ecurringApi
     ) {
         $this->subscriptionItem = $subscriptionItem;
+        $this->cartItemRepository = $cartItemRepository;
         $this->cartExtensionFactory = $cartExtensionFactory;
         $this->ecurringApi = $ecurringApi;
     }

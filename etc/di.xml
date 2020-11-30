@@ -18,6 +18,10 @@
     <preference for="Mollie\Subscriptions\Api\Data\SubscriptionToProductInterface" type="Mollie\Subscriptions\Model\Data\SubscriptionToProduct"/>
     <preference for="Mollie\Subscriptions\Api\Data\SubscriptionToProductSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
 
+    <preference for="Mollie\Subscriptions\Api\CartItemSubscriptionRepositoryInterface" type="Mollie\Subscriptions\Model\CartItemSubscriptionRepository"/>
+    <preference for="Mollie\Subscriptions\Api\Data\CartItemSubscriptionInterface" type="Mollie\Subscriptions\Model\Data\CartItemSubscription"/>
+    <preference for="Mollie\Subscriptions\Api\Data\CartItemSubscriptionSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
     <preference for="Mollie\Subscriptions\Api\Data\SubscriptionCartItemInterface" type="Mollie\Subscriptions\DTO\SubscriptionCartItem" />
 
     <type name="Mollie\Subscriptions\Logger\Handler">
@@ -70,5 +74,9 @@
         </arguments>
     </type>
     <!-- Command line block end -->
+
+    <type name="Magento\Quote\Api\CartRepositoryInterface">
+        <plugin name="mollie_subscription_save_chosen_subscription_option" type="Mollie\Subscriptions\Plugin\CartItem\SaveSelectedOption" />
+    </type>
 
 </config>
