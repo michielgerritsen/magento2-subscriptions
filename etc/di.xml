@@ -22,6 +22,10 @@
     <preference for="Mollie\Subscriptions\Api\Data\CartItemSubscriptionInterface" type="Mollie\Subscriptions\Model\Data\CartItemSubscription"/>
     <preference for="Mollie\Subscriptions\Api\Data\CartItemSubscriptionSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
 
+    <preference for="Mollie\Subscriptions\Api\OrderMandateRepositoryInterface" type="Mollie\Subscriptions\Model\OrderMandateRepository"/>
+    <preference for="Mollie\Subscriptions\Api\Data\OrderMandateInterface" type="Mollie\Subscriptions\Model\Data\OrderMandate"/>
+    <preference for="Mollie\Subscriptions\Api\Data\OrderMandateSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
     <preference for="Mollie\Subscriptions\Api\Data\SubscriptionCartItemInterface" type="Mollie\Subscriptions\DTO\SubscriptionCartItem" />
 
     <type name="Mollie\Subscriptions\Logger\Handler">
@@ -79,4 +83,18 @@
         <plugin name="mollie_subscription_save_chosen_subscription_option" type="Mollie\Subscriptions\Plugin\CartItem\SaveSelectedOption" />
     </type>
 
+    <type name="Mollie\Payment\Service\Order\BuildTransaction">
+        <arguments>
+            <argument name="parts" xsi:type="array">
+                <item name="createCustomerForGuests" xsi:type="object">Mollie\Subscriptions\Service\Order\TransactionPart\CreateCustomerForGuests</item>
+                <item name="sequenceType" xsi:type="object">Mollie\Subscriptions\Service\Order\TransactionPart\SequenceType</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mollie\Subscriptions\Service\Order\TransactionPart\CreateCustomerForGuests">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
 </config>

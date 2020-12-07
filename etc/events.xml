@@ -14,4 +14,7 @@
     <event name="catalog_product_type_prepare_full_options">
         <observer name="mollie_add_subscription_to_options" instance="Mollie\Subscriptions\Observer\CatalogProductTypePrepareFullOptions\AddSubscriptionToProductOptions" />
     </event>
+    <event name="mollie_process_response">
+        <observer name="mollie_send_mandate_to_ecurring" instance="Mollie\Subscriptions\Observer\MollieProcessResponse\SaveMandateId" />
+    </event>
 </config>

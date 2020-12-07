@@ -34,11 +34,11 @@ class SaveSelectedOption
         $this->factory = $factory;
     }
 
-    public function aroundSave(CartRepositoryInterface $subject, Callable $proceed, CartInterface $quote)
+    public function aroundSave(CartRepositoryInterface $subject, callable $proceed, CartInterface $quote)
     {
         $result = $proceed($quote);
 
-        foreach ($quote->getItems() as $item) {
+        foreach ($quote->getAllItems() as $item) {
             $this->handleItem($item);
         }
 
@@ -72,7 +72,7 @@ class SaveSelectedOption
     private function getCartItemSubscription(CartItemInterface $cartItem): CartItemSubscriptionInterface
     {
         try {
-            return $this->repository->getByCart($cartItem);
+            return $this->repository->getByCartItem($cartItem);
         } catch (NoSuchEntityException $exception) {
             $model = $this->factory->create();
             $model->setCartItemId($cartItem->getItemId());

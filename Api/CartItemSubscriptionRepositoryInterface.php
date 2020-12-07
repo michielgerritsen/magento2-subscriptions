@@ -37,7 +37,7 @@ interface CartItemSubscriptionRepositoryInterface
      * @return \Mollie\Subscriptions\Api\Data\CartItemSubscriptionInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getByCart(CartItemInterface $cartItem);
+    public function getByCartItem(CartItemInterface $cartItem);
 
     /**
      * Retrieve cart_item_subscription matching the specified criteria.

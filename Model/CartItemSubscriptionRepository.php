@@ -152,7 +152,7 @@ class CartItemSubscriptionRepository implements CartItemSubscriptionRepositoryIn
     /**
      * {@inheritdoc}
      */
-    public function getByCart(CartItemInterface $cartItem)
+    public function getByCartItem(CartItemInterface $cartItem)
     {
         $cartItemSubscription = $this->cartItemSubscriptionFactory->create();
         $this->resource->load($cartItemSubscription, $cartItem->getItemId(), 'cart_item_id');

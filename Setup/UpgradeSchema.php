@@ -19,6 +19,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
         if (version_compare($context->getVersion(), '0.1.0', '<=')) {
             $this->addCartItemTable($setup);
+            $this->addOrderMandateTable($setup);
         }
 
         $setup->endSetup();
@@ -60,6 +61,48 @@ class UpgradeSchema implements UpgradeSchemaInterface
             'cart_item_id',
             $setup->getTable('quote_item'),
             'item_id',
+            Table::ACTION_CASCADE
+        );
+
+        $connection->createTable($table);
+    }
+
+    private function addOrderMandateTable(SchemaSetupInterface $setup)
+    {
+        $connection = $setup->getConnection();
+        $tableName = $setup->getTable('mollie_subscriptions_order_mandate');
+
+        $table = $connection->newTable($tableName);
+
+        $table->addColumn(
+            'entity_id',
+            Table::TYPE_INTEGER,
+            null,
+            ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true],
+            'Entity Id'
+        );
+
+        $table->addColumn(
+            'order_id',
+            Table::TYPE_INTEGER,
+            null,
+            ['unsigned' => true, 'nullable' => false],
+            'Order ID'
+        );
+
+        $table->addColumn(
+            'mandate_id',
+            Table::TYPE_TEXT,
+            null,
+            ['length' => '30', 'nullable' => false],
+            'Mandate ID'
+        );
+
+        $table->addForeignKey(
+            $setup->getFkName($tableName, 'order_id', 'sales_order', 'entity_id'),
+            'order_id',
+            $setup->getTable('sales_order'),
+            'entity_id',
             Table::ACTION_CASCADE
         );
 
