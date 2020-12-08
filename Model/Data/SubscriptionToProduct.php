@@ -7,30 +7,11 @@ declare(strict_types=1);
 
 namespace Mollie\Subscriptions\Model\Data;
 
+use Magento\Framework\Api\AbstractExtensibleObject;
 use Mollie\Subscriptions\Api\Data\SubscriptionToProductInterface;
 
-class SubscriptionToProduct extends \Magento\Framework\Api\AbstractExtensibleObject implements SubscriptionToProductInterface
+class SubscriptionToProduct extends AbstractExtensibleObject implements SubscriptionToProductInterface
 {
-
-    /**
-     * Get subscription_to_product_id
-     * @return string|null
-     */
-    public function getSubscriptionToProductId()
-    {
-        return $this->_get(self::SUBSCRIPTION_TO_PRODUCT_ID);
-    }
-
-    /**
-     * Set subscription_to_product_id
-     * @param string $subscriptionToProductId
-     * @return \Mollie\Subscriptions\Api\Data\SubscriptionToProductInterface
-     */
-    public function setSubscriptionToProductId($subscriptionToProductId)
-    {
-        return $this->setData(self::SUBSCRIPTION_TO_PRODUCT_ID, $subscriptionToProductId);
-    }
-
     /**
      * Get entity_id
      * @return string|null
@@ -42,12 +23,50 @@ class SubscriptionToProduct extends \Magento\Framework\Api\AbstractExtensibleObj
 
     /**
      * Set entity_id
-     * @param string $entityId
+     * @param string $entity_id
      * @return \Mollie\Subscriptions\Api\Data\SubscriptionToProductInterface
      */
-    public function setEntityId($entityId)
+    public function setEntityId($entity_id)
     {
-        return $this->setData(self::ENTITY_ID, $entityId);
+        return $this->setData(self::ENTITY_ID, $entity_id);
+    }
+
+    /**
+     * Get product_id
+     * @return string|null
+     */
+    public function getProductId()
+    {
+        return $this->_get(self::PRODUCT_ID);
+    }
+
+    /**
+     * Set product_id
+     * @param string $product_id
+     * @return \Mollie\Subscriptions\Api\Data\SubscriptionToProductInterface
+     */
+    public function setProductId($product_id)
+    {
+        return $this->setData(self::PRODUCT_ID, $product_id);
+    }
+
+    /**
+     * Get subscription_id
+     * @return string|null
+     */
+    public function getSubscriptionId()
+    {
+        return $this->_get(self::SUBSCRIPTION_ID);
+    }
+
+    /**
+     * Set subscription_id
+     * @param string $subscription_id
+     * @return \Mollie\Subscriptions\Api\Data\SubscriptionToProductInterface
+     */
+    public function setSubscriptionId($subscription_id)
+    {
+        return $this->setData(self::SUBSCRIPTION_ID, $subscription_id);
     }
 
     /**
