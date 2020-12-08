@@ -26,6 +26,11 @@ define([
         },
 
         parseInitialValue: function () {
+            if (!this.value()) {
+                this.addRow('', '');
+                return;
+            }
+
             var json = JSON.parse(this.value());
 
             _.each(json, function (row) {
