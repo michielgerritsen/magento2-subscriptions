@@ -26,10 +26,7 @@ define([
         },
 
         parseInitialValue: function () {
-            console.log(this.value());
-            debugger;
-
-            if (!this.value()) {
+            if (typeof this.value() != 'string') {
                 this.addRow('', '');
                 return;
             }
