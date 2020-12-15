@@ -42,4 +42,15 @@ class SubscriptionPlanResponse
     {
         return $this->subscriptionPlans;
     }
+
+    public function getById($id): ?SubscriptionPlan
+    {
+        foreach ($this->subscriptionPlans as $plan) {
+            if ($plan->getId() == $id) {
+                return $plan;
+            }
+        }
+
+        return null;
+    }
 }

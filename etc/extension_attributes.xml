@@ -8,4 +8,7 @@
     <extension_attributes for="Magento\Quote\Api\Data\CartItemInterface">
         <attribute code="mollie_subscription" type="Mollie\Subscriptions\Api\Data\SubscriptionCartItemInterface" />
     </extension_attributes>
+    <extension_attributes for="Magento\Customer\Api\Data\CustomerInterface">
+        <attribute code="mollie_subscription_customer_id" type="string" />
+    </extension_attributes>
 </config>

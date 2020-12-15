@@ -1,0 +1,14 @@
+<?php
+/*
+ * Copyright Magmodules.eu. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Mollie\Subscriptions\Block\Frontend\Customer\Account\ActiveSubscriptions $block */
+?>
+
+<?php foreach ($block->getSubscriptions() as $subscription): ?>
+    Plan: <?php echo $subscription->getPlan()->getName() . ' - ' . $subscription->getPlan()->getDescription(); ?><br>
+    Started: <?php echo $subscription->getStartDate(); ?><br>
+    <br>
+<?php endforeach; ?>

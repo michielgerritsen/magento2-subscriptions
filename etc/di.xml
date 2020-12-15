@@ -26,6 +26,10 @@
     <preference for="Mollie\Subscriptions\Api\Data\OrderMandateInterface" type="Mollie\Subscriptions\Model\Data\OrderMandate"/>
     <preference for="Mollie\Subscriptions\Api\Data\OrderMandateSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
 
+    <preference for="Mollie\Subscriptions\Api\MollieSubscriptionCustomerRepositoryInterface" type="Mollie\Subscriptions\Model\MollieSubscriptionCustomerRepository"/>
+    <preference for="Mollie\Subscriptions\Api\Data\MollieSubscriptionCustomerInterface" type="Mollie\Subscriptions\Model\Data\MollieSubscriptionCustomer"/>
+    <preference for="Mollie\Subscriptions\Api\Data\CustomerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
     <preference for="Mollie\Subscriptions\Api\Data\SubscriptionCartItemInterface" type="Mollie\Subscriptions\DTO\SubscriptionCartItem" />
 
     <type name="Mollie\Subscriptions\Logger\Handler">
@@ -86,15 +90,23 @@
     <type name="Mollie\Payment\Service\Order\BuildTransaction">
         <arguments>
             <argument name="parts" xsi:type="array">
-                <item name="createCustomerForGuests" xsi:type="object">Mollie\Subscriptions\Service\Order\TransactionPart\CreateCustomerForGuests</item>
+                <item name="create_customer_for_subscription_carts" xsi:type="object">Mollie\Subscriptions\Service\Order\TransactionPart\CreateCustomerForSubscriptionCarts</item>
                 <item name="sequenceType" xsi:type="object">Mollie\Subscriptions\Service\Order\TransactionPart\SequenceType</item>
             </argument>
         </arguments>
     </type>
 
-    <type name="Mollie\Subscriptions\Service\Order\TransactionPart\CreateCustomerForGuests">
+    <type name="Mollie\Subscriptions\Observer\MollieProcessResponse\SaveMandateInformation">
         <arguments>
             <argument name="session" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
         </arguments>
+    </type>
+
+    <type name="Mollie\Subscriptions\Controller\Index\Index">
+        <plugin name="authentication" type="Magento\Sales\Controller\Order\Plugin\Authentication"/>
+    </type>
+
+    <type name="Magento\Customer\Api\CustomerRepositoryInterface">
+        <plugin name="mollie_subscriptions_customer" type="Mollie\Subscriptions\Plugin\Customer\SubscriptionCustomerId" />
     </type>
 </config>

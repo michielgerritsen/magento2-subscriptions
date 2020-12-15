@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace Mollie\Subscriptions\Model;
 
 use Magento\Framework\Api\SearchCriteriaInterface;
+use Magento\Sales\Api\Data\OrderInterface;
 use Mollie\Subscriptions\Api\Data\OrderMandateInterface;
 use Mollie\Subscriptions\Api\Data\OrderMandateInterfaceFactory;
 use Mollie\Subscriptions\Api\Data\OrderMandateSearchResultsInterfaceFactory;
@@ -148,26 +149,39 @@ class OrderMandateRepository implements OrderMandateRepositoryInterface
     /**
      * {@inheritdoc}
      */
+    public function getByOrder(OrderInterface $order)
+    {
+        $orderMandate = $this->orderMandateFactory->create();
+        $this->resource->load($orderMandate, $order->getEntityId(), 'order_id');
+        if (!$orderMandate->getId()) {
+            throw new NoSuchEntityException(__('order_mandate for order "%1" does not exist.', $order->getEntityId()));
+        }
+        return $orderMandate->getDataModel();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getList(
         SearchCriteriaInterface $criteria
     ) {
         $collection = $this->orderMandateCollectionFactory->create();
-        
+
         $this->extensionAttributesJoinProcessor->process(
             $collection,
             OrderMandateInterface::class
         );
-        
+
         $this->collectionProcessor->process($criteria, $collection);
-        
+
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
-        
+
         $items = [];
         foreach ($collection as $model) {
             $items[] = $model->getDataModel();
         }
-        
+
         $searchResults->setItems($items);
         $searchResults->setTotalCount($collection->getSize());
         return $searchResults;

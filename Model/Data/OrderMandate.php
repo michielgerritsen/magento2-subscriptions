@@ -51,6 +51,25 @@ class OrderMandate extends AbstractExtensibleObject implements OrderMandateInter
     }
 
     /**
+     * Get customer_id
+     * @return string|null
+     */
+    public function getCustomerId()
+    {
+        return $this->_get(self::CUSTOMER_ID);
+    }
+
+    /**
+     * Set customer_id
+     * @param string $customerId
+     * @return \Mollie\Subscriptions\Api\Data\OrderMandateInterface
+     */
+    public function setCustomerId($customerId)
+    {
+        return $this->setData(self::CUSTOMER_ID, $customerId);
+    }
+
+    /**
      * Get mandate_id
      * @return string|null
      */
@@ -67,6 +86,25 @@ class OrderMandate extends AbstractExtensibleObject implements OrderMandateInter
     public function setMandateId($mandateId)
     {
         return $this->setData(self::MANDATE_ID, $mandateId);
+    }
+
+    /**
+     * Get subscription_products
+     * @return string|null
+     */
+    public function getSubscriptionProducts()
+    {
+        return $this->_get(self::SUBSCRIPTION_PRODUCTS);
+    }
+
+    /**
+     * Set subscription_products
+     * @param string $subscriptionProducts
+     * @return \Mollie\Subscriptions\Api\Data\OrderMandateInterface
+     */
+    public function setSubscriptionProducts($subscriptionProducts)
+    {
+        return $this->setData(self::SUBSCRIPTION_PRODUCTS, $subscriptionProducts);
     }
 
     /**

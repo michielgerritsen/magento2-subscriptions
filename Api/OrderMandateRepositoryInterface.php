@@ -7,11 +7,10 @@ declare(strict_types=1);
 
 namespace Mollie\Subscriptions\Api;
 
-use Magento\Framework\Api\SearchCriteriaInterface;
+use Magento\Sales\Api\Data\OrderInterface;
 
 interface OrderMandateRepositoryInterface
 {
-
     /**
      * Save order_mandate
      * @param \Mollie\Subscriptions\Api\Data\OrderMandateInterface $orderMandate
@@ -29,6 +28,14 @@ interface OrderMandateRepositoryInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function get($orderMandateId);
+
+    /**
+     * Retrieve order_mandate by an order
+     * @param OrderInterface $order
+     * @return \Mollie\Subscriptions\Api\Data\OrderMandateInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getByOrder(OrderInterface $order);
 
     /**
      * Retrieve order_mandate matching the specified criteria.

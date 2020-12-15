@@ -6,13 +6,12 @@
 
 namespace Mollie\Subscriptions\Service\Order\TransactionPart;
 
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Sales\Api\Data\OrderInterface;
 use Mollie\Payment\Model\Client\Orders;
 use Mollie\Payment\Model\Client\Payments;
 use Mollie\Payment\Service\Order\TransactionPartInterface;
-use Mollie\Subscriptions\Service\Cart\CartContainsSubscriptionProduct;
+use Mollie\Subscriptions\Service\Order\OrderContainsSubscriptionProduct;
 
 class SequenceType implements TransactionPartInterface
 {
@@ -22,27 +21,21 @@ class SequenceType implements TransactionPartInterface
     private $cartRepository;
 
     /**
-     * @var CartContainsSubscriptionProduct
+     * @var OrderContainsSubscriptionProduct
      */
-    private $cartContainsSubscriptionProduct;
+    private $orderContainsSubscriptionProduct;
 
     public function __construct(
         CartRepositoryInterface $cartRepository,
-        CartContainsSubscriptionProduct $cartContainsSubscriptionProduct
+        OrderContainsSubscriptionProduct $orderContainsSubscriptionProduct
     ) {
         $this->cartRepository = $cartRepository;
-        $this->cartContainsSubscriptionProduct = $cartContainsSubscriptionProduct;
+        $this->orderContainsSubscriptionProduct = $orderContainsSubscriptionProduct;
     }
 
     public function process(OrderInterface $order, $apiMethod, array $transaction)
     {
-        try {
-            $quote = $this->cartRepository->get($order->getQuoteId());
-        } catch (NoSuchEntityException $exception) {
-            return $transaction;
-        }
-
-        if (!$this->cartContainsSubscriptionProduct->check($quote)) {
+        if (!$this->orderContainsSubscriptionProduct->check($order)) {
             return $transaction;
         }
 

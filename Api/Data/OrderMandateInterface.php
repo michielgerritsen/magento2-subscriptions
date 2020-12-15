@@ -11,7 +11,9 @@ interface OrderMandateInterface extends \Magento\Framework\Api\ExtensibleDataInt
 {
     const ENTITY_ID = 'entity_id';
     const ORDER_ID = 'order_id';
+    const CUSTOMER_ID = 'customer_id';
     const MANDATE_ID = 'mandate_id';
+    const SUBSCRIPTION_PRODUCTS = 'subscription_products';
 
     /**
      * Get entity_id
@@ -40,6 +42,19 @@ interface OrderMandateInterface extends \Magento\Framework\Api\ExtensibleDataInt
     public function setOrderId($orderId);
 
     /**
+     * Get customer_id
+     * @return string|null
+     */
+    public function getCustomerId();
+
+    /**
+     * Set customer_id
+     * @param string $customerId
+     * @return \Mollie\Subscriptions\Api\Data\OrderMandateInterface
+     */
+    public function setCustomerId($customerId);
+
+    /**
      * Get mandate_id
      * @return string|null
      */
@@ -51,6 +66,19 @@ interface OrderMandateInterface extends \Magento\Framework\Api\ExtensibleDataInt
      * @return \Mollie\Subscriptions\Api\Data\OrderMandateInterface
      */
     public function setMandateId($mandateId);
+
+    /**
+     * Get subscription_products
+     * @return string|null
+     */
+    public function getSubscriptionProducts();
+
+    /**
+     * Set subscription_products
+     * @param string $subscriptionProducts
+     * @return \Mollie\Subscriptions\Api\Data\OrderMandateInterface
+     */
+    public function setSubscriptionProducts($subscriptionProducts);
 
     /**
      * Retrieve existing extension attributes object or create a new one.
