@@ -7,6 +7,7 @@
 namespace Mollie\Subscriptions\Form\Modifier;
 
 use Magento\Catalog\Model\Locator\LocatorInterface;
+use Magento\Catalog\Model\Product\Type;
 use Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\AbstractModifier;
 use Magento\Framework\Stdlib\ArrayManager;
 use Magento\Store\Model\StoreManagerInterface;
@@ -50,8 +51,13 @@ class SubscriptionProducts extends AbstractModifier
 
     public function modifyMeta(array $meta)
     {
+        $path = $this->arrayManager->findPath('mollie_subscription_product', $meta, null, 'children') . static::META_CONFIG_PATH;
+        if ($this->locator->getProduct()->getTypeId() != Type::TYPE_SIMPLE) {
+            return $this->arrayManager->remove($path, []);
+        }
+
         return $this->arrayManager->merge(
-            $this->arrayManager->findPath('mollie_subscription_product', $meta, null, 'children') . static::META_CONFIG_PATH,
+            $path,
             $meta,
             [
                 'component' => 'Mollie_Subscriptions/js/view/product/input/map-ecurring-to-product',
