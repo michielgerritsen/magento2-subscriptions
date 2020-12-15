@@ -70,7 +70,7 @@ class MollieSubscriptionCustomer extends AbstractExtensibleObject implements Mol
 
     /**
      * Retrieve existing extension attributes object or create a new one.
-     * @return \Mollie\Subscriptions\Api\Data\MollieSubscriptionCustomerExtensionInterface|null
+     * @return \Mollie\Subscriptions\Api\Data\MollieSubscriptionCustomerExtensionInterface|\Magento\Framework\Api\ExtensionAttributesInterface|null
      */
     public function getExtensionAttributes()
     {

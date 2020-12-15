@@ -51,7 +51,7 @@ class CartContainsSubscriptionProduct
 
         $items = $this->repository->getList($criteria->create());
 
-        $result = $items->getTotalCount();
+        $result = (bool)$items->getTotalCount();
         $this->result[$cart->getId()] = $result;
         return $result;
     }

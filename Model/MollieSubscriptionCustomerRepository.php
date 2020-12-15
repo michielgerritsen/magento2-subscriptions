@@ -45,7 +45,7 @@ class MollieSubscriptionCustomerRepository implements MollieSubscriptionCustomer
     protected $customerCollectionFactory;
 
     /**
-     * @var SearchResultsInterface
+     * @var SearchResultsInterfaceFactory
      */
     protected $searchResultsFactory;
 

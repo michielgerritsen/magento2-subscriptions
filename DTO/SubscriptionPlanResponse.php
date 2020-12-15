@@ -30,7 +30,7 @@ class SubscriptionPlanResponse
             $subscriptionPlans[] = SubscriptionPlan::fromArray($subscriptionPlanData);
         }
 
-        return new static(
+        return new self(
             $subscriptionPlans
         );
     }

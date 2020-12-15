@@ -60,7 +60,7 @@ class SubscriptionProductButtons extends Template
         $product = $this->registry->registry('product');
 
         if (!$product->getData('mollie_subscription_product')) {
-            return null;
+            return '';
         }
 
         return parent::_toHtml();

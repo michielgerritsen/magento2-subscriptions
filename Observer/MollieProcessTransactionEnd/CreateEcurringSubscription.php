@@ -69,17 +69,17 @@ class CreateEcurringSubscription implements ObserverInterface
             return;
         }
 
-        $customer = $this->getSubscriptionCustomerId($order, $mandate);
-        $this->saveSubscriptionCustomerIdToCustomer($customer->getId());
+        $customerId = $this->getSubscriptionCustomerId($order, $mandate);
+        $this->saveSubscriptionCustomerIdToCustomer($customerId);
 
         $this->ecurringApi->createMandate(
-            $customer->getId(),
+            $customerId,
             $mandate->getMandateId()
         );
 
         foreach (explode(',', $mandate->getSubscriptionProducts()) as $productId) {
             $this->ecurringApi->createActivatedSubscription(
-                $customer->getId(),
+                $customerId,
                 $productId
             );
         }

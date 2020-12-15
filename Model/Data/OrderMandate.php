@@ -23,7 +23,7 @@ class OrderMandate extends AbstractExtensibleObject implements OrderMandateInter
 
     /**
      * Set entity_id
-     * @param string $orderId
+     * @param string $entityId
      * @return \Mollie\Subscriptions\Api\Data\OrderMandateInterface
      */
     public function setEntityId($entityId)
@@ -109,7 +109,7 @@ class OrderMandate extends AbstractExtensibleObject implements OrderMandateInter
 
     /**
      * Retrieve existing extension attributes object or create a new one.
-     * @return \Mollie\Subscriptions\Api\Data\OrderMandateExtensionInterface|null
+     * @return \Mollie\Subscriptions\Api\Data\OrderMandateExtensionInterface|\Magento\Framework\Api\ExtensionAttributesInterface|null
      */
     public function getExtensionAttributes()
     {

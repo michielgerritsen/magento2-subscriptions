@@ -42,7 +42,7 @@ class SubscriptionPlan
 
     public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             $data['id'],
             $data['attributes']['name'],
             $data['attributes']['description'],

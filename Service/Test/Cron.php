@@ -7,6 +7,8 @@ declare(strict_types=1);
 
 namespace Mollie\Subscriptions\Service\Test;
 
+use Magento\Cron\Model\ResourceModel\Schedule\Collection as ScheduleCollection;
+use Magento\Cron\Model\ResourceModel\Schedule\CollectionFactory;
 use Magento\Cron\Model\Schedule;
 
 /**
@@ -56,19 +58,14 @@ class Cron
     const SUPPORT_LINK = 'https://www.magmodules.eu/help/magento2/cronjob-setup.html';
 
     /**
-     * @var Schedule
+     * @var CollectionFactory
      */
-    private $schedule;
+    private $scheduleCollectionFactory;
 
-    /**
-     * Repository constructor.
-     *
-     * @param Schedule $schedule
-     */
     public function __construct(
-        Schedule $schedule
+        CollectionFactory $scheduleCollectionFactory
     ) {
-        $this->schedule = $schedule;
+        $this->scheduleCollectionFactory = $scheduleCollectionFactory;
     }
 
     /**
@@ -83,7 +80,10 @@ class Cron
             'visible' => self::VISIBLE,
 
         ];
-        $scheduleCollection = $this->schedule->getCollection()
+
+        /** @var ScheduleCollection $collection */
+        $collection = $this->scheduleCollectionFactory->create();
+        $scheduleCollection = $collection
             ->addFieldToSelect('scheduled_at')
             ->addFieldToFilter('status', 'success');
 

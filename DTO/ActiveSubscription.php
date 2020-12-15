@@ -140,7 +140,7 @@ class ActiveSubscription
 
     public static function fromArray($id, SubscriptionPlan $plan, $data): self
     {
-        return new static(
+        return new self(
             $id,
             $plan,
             $data['mandate_code'],

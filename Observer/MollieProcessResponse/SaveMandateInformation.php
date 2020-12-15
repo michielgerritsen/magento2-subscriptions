@@ -101,7 +101,7 @@ class SaveMandateInformation implements ObserverInterface
     {
         $payment = $observer->getData('mollie_payment');
         if ($observer->hasData('mollie_order')) {
-            /** @var MollieOrder $order */
+            /** @var MollieOrder $mollieOrder */
             $mollieOrder = $observer->getData('mollie_order');
             $payment = $mollieOrder->payments()[0];
         }

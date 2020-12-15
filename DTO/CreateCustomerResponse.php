@@ -189,7 +189,7 @@ class CreateCustomerResponse
 
     public static function fromArray($id, $data): self
     {
-        return new static(
+        return new self(
             $id,
             $data['first_name'],
             $data['last_name'],

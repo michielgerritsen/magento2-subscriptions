@@ -71,7 +71,7 @@ class CartItemSubscription extends AbstractExtensibleObject implements CartItemS
 
     /**
      * Retrieve existing extension attributes object or create a new one.
-     * @return \Mollie\Subscriptions\Api\Data\CartItemSubscriptionExtensionInterface|null
+     * @return \Mollie\Subscriptions\Api\Data\CartItemSubscriptionExtensionInterface|\Magento\Framework\Api\ExtensionAttributesInterface|null
      */
     public function getExtensionAttributes()
     {

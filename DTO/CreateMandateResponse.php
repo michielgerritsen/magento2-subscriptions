@@ -70,7 +70,7 @@ class CreateMandateResponse
 
     public static function fromArray($id, $data): self
     {
-        return new static(
+        return new self(
             $id,
             $data['status'],
             $data['code'],

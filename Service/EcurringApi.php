@@ -71,7 +71,7 @@ class EcurringApi
     }
 
     /**
-     * @param $mollieCustomerId
+     * @param string $mollieCustomerId
      * @throws \Exception
      * @return ActiveSubscription[]
      */

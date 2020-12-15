@@ -31,7 +31,7 @@ interface MollieSubscriptionCustomerRepositoryInterface
     /**
      * Retrieve Mollie Customer by Magento customer
      * @param \Magento\Customer\Api\Data\CustomerInterface $customer
-     * @return \Mollie\Subscriptions\Api\Data\MollieSubscriptionCustomerInterface
+     * @return \Mollie\Subscriptions\Api\Data\MollieSubscriptionCustomerInterface|null
      */
     public function getByCustomer(CustomerInterface $customer);
 

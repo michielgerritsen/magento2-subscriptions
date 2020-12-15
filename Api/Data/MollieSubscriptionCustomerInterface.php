@@ -42,7 +42,7 @@ interface MollieSubscriptionCustomerInterface extends ExtensibleDataInterface
 
     /**
      * Get mollie_customer_id
-     * @return text|null
+     * @return string|null
      */
     public function getMollieSubscriptionCustomerId();
 
