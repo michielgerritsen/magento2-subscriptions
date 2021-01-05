@@ -23,4 +23,7 @@
     <event name="checkout_allow_guest">
         <observer name="mollie_subscriptions_force_customer_login" instance="Mollie\Subscriptions\Observer\CheckoutAllowGuest\ForceCustomerLoginWhenSubscriptionItemInCart" />
     </event>
+    <event name="checkout_cart_product_add_before">
+        <observer name="mollie_subscriptions_force_subscription_products" instance="Mollie\Subscriptions\Observer\CheckoutCartProductAddBefore\CheckTheAddedProductIsASubscriptionproduct" />
+    </event>
 </config>

@@ -30,5 +30,14 @@
                 <field id="enable">1</field>
             </depends>
         </field>
+        <field id="disable_add_to_cart" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1"
+               showInStore="1">
+            <label>Disable default add to cart button for subscription products</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>mollie_subscriptions/general/disable_add_to_cart</config_path>
+            <depends>
+                <field id="enable">1</field>
+            </depends>
+        </field>
     </group>
 </include>

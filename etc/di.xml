@@ -109,4 +109,8 @@
     <type name="Magento\Customer\Api\CustomerRepositoryInterface">
         <plugin name="mollie_subscriptions_customer" type="Mollie\Subscriptions\Plugin\Customer\SubscriptionCustomerId" />
     </type>
+
+    <type name="Magento\Quote\Api\PaymentMethodManagementInterface">
+        <plugin name="mollie_subscriptions_limit_payment_methods" type="Mollie\Subscriptions\Plugin\Quote\Api\PaymentMethodManagementPlugin" />
+    </type>
 </config>

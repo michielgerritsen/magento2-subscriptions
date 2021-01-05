@@ -21,9 +21,10 @@ use Magento\Store\Model\StoreManagerInterface;
 class Config
 {
     const EXTENSION_CODE = 'Mollie_Subscriptions';
-    const XML_PATH_EXTENSION_VERSION = 'Mollie_Subscriptions/general/version';
-    const XML_PATH_EXTENSION_ENABLE = 'Mollie_Subscriptions/general/enable';
-    const XML_PATH_DEBUG = 'Mollie_Subscriptions/general/debug';
+    const XML_PATH_EXTENSION_VERSION = 'mollie_subscriptions/general/version';
+    const XML_PATH_EXTENSION_ENABLE = 'mollie_subscriptions/general/enable';
+    const XML_PATH_DEBUG = 'mollie_subscriptions/general/debug';
+    const XML_PATH_DISABLE_ADD_TO_CART = 'mollie_subscriptions/general/disable_add_to_cart';
     const MODULE_SUPPORT_LINK = 'https://www.magmodules.eu/help/%s';
 
     /**
@@ -58,9 +59,6 @@ class Config
         $this->encryptor = $encryptor;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getExtensionVersion(): string
     {
         return $this->getStoreValue(self::XML_PATH_EXTENSION_VERSION);
@@ -87,9 +85,6 @@ class Config
         return (string)$this->scopeConfig->getValue($path, $scope, (int)$storeId);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getStore(): StoreInterface
     {
         try {
@@ -102,10 +97,6 @@ class Config
         $stores = $this->storeManager->getStores();
         return reset($stores);
     }
-
-    /**
-     * {@inheritDoc}
-     */
 
     public function getMagentoVersion(): string
     {
@@ -130,17 +121,11 @@ class Config
         return $this->scopeConfig->isSetFlag($path, $scope, (int)$storeId);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getExtensionCode(): string
     {
         return self::EXTENSION_CODE;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function isDebugMode(int $storeId = null): bool
     {
         $scope = $scope ?? ScopeInterface::SCOPE_STORE;
@@ -151,12 +136,14 @@ class Config
         );
     }
 
-    /**
-     * @inheritDoc
-     */
     public function isEnabled(int $storeId = null): bool
     {
         return $this->getFlag(self::XML_PATH_EXTENSION_ENABLE, $storeId);
+    }
+
+    public function disableAddToCartButton(int $storeId = null)
+    {
+        return $this->getFlag(static::XML_PATH_DISABLE_ADD_TO_CART, $storeId);
     }
 
     public function getApiKey($storeId = null)
