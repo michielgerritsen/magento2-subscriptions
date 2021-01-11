@@ -23,6 +23,11 @@ class SubscriptionPlanResponse
         $this->subscriptionPlans = $subscriptionPlans;
     }
 
+    /**
+     * @param array $response
+     * @return static
+     * phpcs:disable Magento2.Functions.StaticFunction
+     */
     public static function fromArray(array $response): self
     {
         $subscriptionPlans = [];

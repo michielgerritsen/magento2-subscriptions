@@ -7,12 +7,6 @@ declare(strict_types=1);
 
 namespace Mollie\Subscriptions\Model;
 
-use Magento\Quote\Api\Data\CartItemInterface;
-use Mollie\Subscriptions\Api\CartItemSubscriptionRepositoryInterface;
-use Mollie\Subscriptions\Api\Data\CartItemSubscriptionInterfaceFactory;
-use Mollie\Subscriptions\Api\Data\CartItemSubscriptionSearchResultsInterfaceFactory;
-use Mollie\Subscriptions\Model\ResourceModel\CartItemSubscription as ResourceCartItemSubscription;
-use Mollie\Subscriptions\Model\ResourceModel\CartItemSubscription\CollectionFactory as CartItemSubscriptionCollectionFactory;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Api\ExtensibleDataObjectConverter;
 use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
@@ -21,7 +15,14 @@ use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Reflection\DataObjectProcessor;
+use Magento\Quote\Api\Data\CartItemInterface;
 use Magento\Store\Model\StoreManagerInterface;
+use Mollie\Subscriptions\Api\CartItemSubscriptionRepositoryInterface;
+use Mollie\Subscriptions\Api\Data\CartItemSubscriptionInterfaceFactory;
+use Mollie\Subscriptions\Api\Data\CartItemSubscriptionSearchResultsInterfaceFactory;
+use Mollie\Subscriptions\Model\ResourceModel\CartItemSubscription as ResourceCartItemSubscription;
+use Mollie\Subscriptions\Model\ResourceModel\CartItemSubscription\CollectionFactory
+    as CartItemSubscriptionCollectionFactory;
 
 class CartItemSubscriptionRepository implements CartItemSubscriptionRepositoryInterface
 {
@@ -112,19 +113,14 @@ class CartItemSubscriptionRepository implements CartItemSubscriptionRepositoryIn
     public function save(
         \Mollie\Subscriptions\Api\Data\CartItemSubscriptionInterface $cartItemSubscription
     ) {
-        /* if (empty($cartItemSubscription->getStoreId())) {
-            $storeId = $this->storeManager->getStore()->getId();
-            $cartItemSubscription->setStoreId($storeId);
-        } */
-        
         $cartItemSubscriptionData = $this->extensibleDataObjectConverter->toNestedArray(
             $cartItemSubscription,
             [],
             \Mollie\Subscriptions\Api\Data\CartItemSubscriptionInterface::class
         );
-        
+
         $cartItemSubscriptionModel = $this->cartItemSubscriptionFactory->create()->setData($cartItemSubscriptionData);
-        
+
         try {
             $this->resource->save($cartItemSubscriptionModel);
         } catch (\Exception $exception) {
@@ -144,7 +140,9 @@ class CartItemSubscriptionRepository implements CartItemSubscriptionRepositoryIn
         $cartItemSubscription = $this->cartItemSubscriptionFactory->create();
         $this->resource->load($cartItemSubscription, $cartItemSubscriptionId);
         if (!$cartItemSubscription->getId()) {
-            throw new NoSuchEntityException(__('cart_item_subscription with id "%1" does not exist.', $cartItemSubscriptionId));
+            throw new NoSuchEntityException(
+                __('cart_item_subscription with id "%1" does not exist.', $cartItemSubscriptionId)
+            );
         }
         return $cartItemSubscription->getDataModel();
     }
@@ -172,22 +170,22 @@ class CartItemSubscriptionRepository implements CartItemSubscriptionRepositoryIn
         \Magento\Framework\Api\SearchCriteriaInterface $criteria
     ) {
         $collection = $this->cartItemSubscriptionCollectionFactory->create();
-        
+
         $this->extensionAttributesJoinProcessor->process(
             $collection,
             \Mollie\Subscriptions\Api\Data\CartItemSubscriptionInterface::class
         );
-        
+
         $this->collectionProcessor->process($criteria, $collection);
-        
+
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
-        
+
         $items = [];
         foreach ($collection as $model) {
             $items[] = $model->getDataModel();
         }
-        
+
         $searchResults->setItems($items);
         $searchResults->setTotalCount($collection->getSize());
         return $searchResults;
@@ -220,4 +218,3 @@ class CartItemSubscriptionRepository implements CartItemSubscriptionRepositoryIn
         return $this->delete($this->get($cartItemSubscriptionId));
     }
 }
-

@@ -7,6 +7,7 @@
 namespace Mollie\Subscriptions\Service;
 
 use Magento\Framework\App\CacheInterface;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\HTTP\ClientInterface;
 use Magento\Framework\HTTP\ClientInterfaceFactory;
 use Magento\Sales\Api\Data\OrderAddressInterface;
@@ -154,7 +155,7 @@ class EcurringApi
 
     private function doGetRequest($url, $identifierKey = null)
     {
-        $identifier = static::CACHE_IDENTIFIER_PREFIX . md5($url . $identifierKey);
+        $identifier = static::CACHE_IDENTIFIER_PREFIX . hash('md5', $url . $identifierKey);
         if ($result = $this->cache->load($identifier)) {
             return json_decode($result, true);
         }
@@ -172,7 +173,7 @@ class EcurringApi
 
         if (array_key_exists('errors', $json)) {
             $message = implode(', ', array_column($json['errors'], 'detail'));
-            throw new \Exception($message);
+            throw new LocalizedException(__($message));
         }
 
         $this->cache->save(
@@ -195,8 +196,6 @@ class EcurringApi
         $client->addHeader('Accept', 'application/vnd.api+json');
 
         $client->post($url, json_encode($data));
-
-
 
         return json_decode($client->getBody(), true);
     }

@@ -20,4 +20,3 @@ class SubscriptionToProduct extends \Magento\Framework\Model\ResourceModel\Db\Ab
         $this->_init('mollie_subscriptions_subscription_to_product', 'subscription_to_product_id');
     }
 }
-

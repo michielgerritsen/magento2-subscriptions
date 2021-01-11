@@ -67,4 +67,3 @@ interface CartItemSubscriptionInterface extends \Magento\Framework\Api\Extensibl
         \Mollie\Subscriptions\Api\Data\CartItemSubscriptionExtensionInterface $extensionAttributes
     );
 }
-

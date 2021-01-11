@@ -20,4 +20,3 @@ class ActiveSubscription extends \Magento\Framework\Model\ResourceModel\Db\Abstr
         $this->_init('mollie_active_subscription', 'entity_id');
     }
 }
-

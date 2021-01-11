@@ -22,4 +22,3 @@ interface OrderMandateSearchResultsInterface extends \Magento\Framework\Api\Sear
      */
     public function setItems(array $items);
 }
-

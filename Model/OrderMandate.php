@@ -63,4 +63,3 @@ class OrderMandate extends \Magento\Framework\Model\AbstractModel
         return $order_mandateDataObject;
     }
 }
-

@@ -51,7 +51,15 @@ class SubscriptionProducts extends AbstractModifier
 
     public function modifyMeta(array $meta)
     {
-        $path = $this->arrayManager->findPath('mollie_subscription_product', $meta, null, 'children') . static::META_CONFIG_PATH;
+        $path = $this->arrayManager->findPath(
+            'mollie_subscription_product',
+            $meta,
+            null,
+            'children'
+        );
+
+        $path .= static::META_CONFIG_PATH;
+
         if ($this->locator->getProduct()->getTypeId() != Type::TYPE_SIMPLE) {
             return $this->arrayManager->remove($path, []);
         }

@@ -24,6 +24,7 @@ class AddSubscriptionToProductOptions implements ObserverInterface
             return;
         }
 
-        $transport->options['mollie_subscriptions_product_id'] = $buyRequest->getData('mollie_subscriptions_product_id');
+        $data = $buyRequest->getData('mollie_subscriptions_product_id');
+        $transport->options['mollie_subscriptions_product_id'] = $data;
     }
 }

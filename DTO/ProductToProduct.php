@@ -6,6 +6,9 @@
 
 namespace Mollie\Subscriptions\DTO;
 
+/**
+ * @phpcs:disable Magento.Functions.StaticFunction
+ */
 class ProductToProduct
 {
     /**

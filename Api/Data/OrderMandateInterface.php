@@ -95,4 +95,3 @@ interface OrderMandateInterface extends \Magento\Framework\Api\ExtensibleDataInt
         \Mollie\Subscriptions\Api\Data\OrderMandateExtensionInterface $extensionAttributes
     );
 }
-

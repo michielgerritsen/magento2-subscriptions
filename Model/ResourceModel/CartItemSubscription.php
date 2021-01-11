@@ -21,4 +21,3 @@ class CartItemSubscription extends AbstractDb
         $this->_init('mollie_subscriptions_cart_item', 'entity_id');
     }
 }
-

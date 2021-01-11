@@ -40,6 +40,11 @@ class SubscriptionPlan
         $this->status = $status;
     }
 
+    /**
+     * @param array $data
+     * @return static
+     * phpcs:disable Magento2.Functions.StaticFunction
+     */
     public static function fromArray(array $data): self
     {
         return new self(

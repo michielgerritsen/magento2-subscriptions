@@ -58,4 +58,3 @@ interface SubscriptionToProductRepositoryInterface
      */
     public function deleteById($subscriptionToProductId);
 }
-

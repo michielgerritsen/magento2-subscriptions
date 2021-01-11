@@ -67,4 +67,3 @@ interface SubscriptionToProductInterface extends \Magento\Framework\Api\Extensib
         \Mollie\Subscriptions\Api\Data\SubscriptionToProductExtensionInterface $extensionAttributes
     );
 }
-

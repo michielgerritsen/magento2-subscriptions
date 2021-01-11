@@ -98,6 +98,7 @@ class ActiveSubscription
      */
     private $updated_at;
 
+    // phpcs:disable PEAR.Functions.ValidDefaultValue.NotAtEnd
     public function __construct(
         $id,
         SubscriptionPlan $plan,
@@ -138,6 +139,13 @@ class ActiveSubscription
         $this->updated_at = $updated_at;
     }
 
+    /**
+     * @param int $id
+     * @param SubscriptionPlan $plan
+     * @param array $data
+     * @return static
+     * phpcs:disable Magento2.Functions.StaticFunction
+     */
     public static function fromArray($id, SubscriptionPlan $plan, $data): self
     {
         return new self(

@@ -89,4 +89,3 @@ class CartItemSubscription extends AbstractExtensibleObject implements CartItemS
         return $this->_setExtensionAttributes($extensionAttributes);
     }
 }
-

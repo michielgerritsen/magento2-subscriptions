@@ -68,4 +68,3 @@ interface CartItemSubscriptionRepositoryInterface
      */
     public function deleteById($cartItemSubscriptionId);
 }
-

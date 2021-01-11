@@ -127,4 +127,3 @@ class OrderMandate extends AbstractExtensibleObject implements OrderMandateInter
         return $this->_setExtensionAttributes($extensionAttributes);
     }
 }
-

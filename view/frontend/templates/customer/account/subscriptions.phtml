@@ -8,7 +8,8 @@
 ?>
 
 <?php foreach ($block->getSubscriptions() as $subscription): ?>
-    Plan: <?php echo $subscription->getPlan()->getName() . ' - ' . $subscription->getPlan()->getDescription(); ?><br>
-    Started: <?php echo $subscription->getStartDate(); ?><br>
+    <?php $plan = $subscription->getPlan()->getName() . ' - ' . $subscription->getPlan()->getDescription(); ?>
+    Plan: <?= $block->escapeHtml($plan); ?><br>
+    Started: <?= $block->escapeHtml($subscription->getStartDate()); ?><br>
     <br>
 <?php endforeach; ?>

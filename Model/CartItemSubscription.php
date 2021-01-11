@@ -64,4 +64,3 @@ class CartItemSubscription extends AbstractModel
         return $cart_item_subscriptionDataObject;
     }
 }
-

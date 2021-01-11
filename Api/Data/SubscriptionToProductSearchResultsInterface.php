@@ -23,4 +23,3 @@ interface SubscriptionToProductSearchResultsInterface extends \Magento\Framework
      */
     public function setItems(array $items);
 }
-

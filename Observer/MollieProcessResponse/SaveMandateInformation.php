@@ -74,9 +74,11 @@ class SaveMandateInformation implements ObserverInterface
             try {
                 $cartItem = $this->cartItemSubscriptionRepository->getByCartItem($item);
                 $subscriptionProducts[] = $cartItem->getSubscriptionProductId();
+            // @codingStandardsIgnoreStart
             } catch (NoSuchEntityException $exception) {
                 // The cart can contain items that don't have a subscription.
             }
+            // @codingStandardsIgnoreEnd
         }
 
         if (!$subscriptionProducts) {

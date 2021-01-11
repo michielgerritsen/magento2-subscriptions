@@ -214,4 +214,3 @@ class OrderMandateRepository implements OrderMandateRepositoryInterface
         return $this->delete($this->get($orderMandateId));
     }
 }
-

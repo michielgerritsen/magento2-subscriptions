@@ -25,4 +25,3 @@ interface CartItemSubscriptionSearchResultsInterface extends SearchResultsInterf
      */
     public function setItems(array $items);
 }
-

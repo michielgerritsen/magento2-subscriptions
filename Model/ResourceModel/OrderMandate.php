@@ -21,4 +21,3 @@ class OrderMandate extends AbstractDb
         $this->_init('mollie_subscriptions_order_mandate', 'entity_id');
     }
 }
-

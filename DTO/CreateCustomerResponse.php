@@ -187,6 +187,12 @@ class CreateCustomerResponse
         $this->updated_at = $updated_at;
     }
 
+    /**
+     * @param int $id
+     * @param array $data
+     * @return static
+     * phpcs:disable Magento2.Functions.StaticFunction
+     */
     public static function fromArray($id, $data): self
     {
         return new self(

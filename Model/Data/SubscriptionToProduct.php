@@ -89,4 +89,3 @@ class SubscriptionToProduct extends AbstractExtensibleObject implements Subscrip
         return $this->_setExtensionAttributes($extensionAttributes);
     }
 }
-

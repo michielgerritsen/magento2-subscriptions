@@ -66,4 +66,3 @@ interface OrderMandateRepositoryInterface
      */
     public function deleteById($orderMandateId);
 }
-
