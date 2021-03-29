@@ -13,7 +13,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Sales\Api\Data\OrderInterface;
 use Mollie\Api\Resources\Order as MollieOrder;
-use Mollie\Subscriptions\Api\CartItemSubscriptionRepositoryInterface;
 use Mollie\Subscriptions\Api\Data\OrderMandateInterface;
 use Mollie\Subscriptions\Api\Data\OrderMandateInterfaceFactory;
 use Mollie\Subscriptions\Api\OrderMandateRepositoryInterface;
@@ -31,11 +30,6 @@ class SaveMandateInformation implements ObserverInterface
     private $mandateFactory;
 
     /**
-     * @var CartItemSubscriptionRepositoryInterface
-     */
-    private $cartItemSubscriptionRepository;
-
-    /**
      * @var Session
      */
     private $session;
@@ -48,13 +42,11 @@ class SaveMandateInformation implements ObserverInterface
     public function __construct(
         OrderMandateRepositoryInterface $repository,
         OrderMandateInterfaceFactory $mandateFactory,
-        CartItemSubscriptionRepositoryInterface $cartItemSubscriptionRepository,
         CartRepositoryInterface $cartRepository,
         Session $session
     ) {
         $this->repository = $repository;
         $this->mandateFactory = $mandateFactory;
-        $this->cartItemSubscriptionRepository = $cartItemSubscriptionRepository;
         $this->cartRepository = $cartRepository;
         $this->session = $session;
     }

@@ -51,28 +51,52 @@ class SubscriptionProducts extends AbstractModifier
 
     public function modifyMeta(array $meta)
     {
-        $path = $this->arrayManager->findPath(
-            'mollie_subscription_product',
+        $repetitionAmountField = 'mollie_subscription_repetition_amount';
+        $repetitionTypeField = 'mollie_subscription_repetition_type';
+
+        $meta = $this->mergeToGroup(
             $meta,
-            null,
-            'children'
+            'mollie_subscription_interval_amount',
+            'mollie_subscription_interval_type'
         );
 
-        $path .= static::META_CONFIG_PATH;
+        $meta = $this->mergeToGroup(
+            $meta,
+            $repetitionAmountField,
+            $repetitionTypeField
+        );
 
-        if ($this->locator->getProduct()->getTypeId() != Type::TYPE_SIMPLE) {
-            return $this->arrayManager->remove($path, []);
+        return $meta;
+    }
+
+    public function mergeToGroup(array $meta, $field1, $field2): array
+    {
+        $field1Path = $this->arrayManager->findPath($field1, $meta, null, 'children');
+        $field2Path = $this->arrayManager->findPath($field2, $meta, null, 'children');
+
+        if ($field1Path && $field2Path) {
+            $field1ContainerPath = $this->arrayManager->slicePath($field1Path, 0, -2);
+            $field2ContainerPath = $this->arrayManager->slicePath($field2Path, 0, -2);
+
+            $meta = $this->arrayManager->merge(
+                $field1ContainerPath . self::META_CONFIG_PATH,
+                $meta,
+                [
+                    'breakLine' => false,
+                    'component' => 'Magento_Ui/js/form/components/group',
+                ]
+            );
+
+            $meta = $this->arrayManager->set(
+                $field1ContainerPath . '/children/' . $field2,
+                $meta,
+                $this->arrayManager->get($field2Path, $meta)
+            );
+
+            $meta = $this->arrayManager->remove($field2ContainerPath, $meta);
         }
 
-        return $this->arrayManager->merge(
-            $path,
-            $meta,
-            [
-                'component' => 'Mollie_Subscriptions/js/view/product/input/map-ecurring-to-product',
-                'template' => 'Mollie_Subscriptions/view/product/input/map-ecurring-to-product',
-                'options' => $this->getOptions(),
-            ]
-        );
+        return $meta;
     }
 
     /**

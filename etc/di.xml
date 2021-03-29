@@ -18,10 +18,6 @@
     <preference for="Mollie\Subscriptions\Api\Data\SubscriptionToProductInterface" type="Mollie\Subscriptions\Model\Data\SubscriptionToProduct"/>
     <preference for="Mollie\Subscriptions\Api\Data\SubscriptionToProductSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
 
-    <preference for="Mollie\Subscriptions\Api\CartItemSubscriptionRepositoryInterface" type="Mollie\Subscriptions\Model\CartItemSubscriptionRepository"/>
-    <preference for="Mollie\Subscriptions\Api\Data\CartItemSubscriptionInterface" type="Mollie\Subscriptions\Model\Data\CartItemSubscription"/>
-    <preference for="Mollie\Subscriptions\Api\Data\CartItemSubscriptionSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
-
     <preference for="Mollie\Subscriptions\Api\OrderMandateRepositoryInterface" type="Mollie\Subscriptions\Model\OrderMandateRepository"/>
     <preference for="Mollie\Subscriptions\Api\Data\OrderMandateInterface" type="Mollie\Subscriptions\Model\Data\OrderMandate"/>
     <preference for="Mollie\Subscriptions\Api\Data\OrderMandateSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
@@ -83,10 +79,6 @@
     </type>
     <!-- Command line block end -->
 
-    <type name="Magento\Quote\Api\CartRepositoryInterface">
-        <plugin name="mollie_subscription_save_chosen_subscription_option" type="Mollie\Subscriptions\Plugin\CartItem\SaveSelectedOption" />
-    </type>
-
     <type name="Mollie\Payment\Service\Order\BuildTransaction">
         <arguments>
             <argument name="parts" xsi:type="array">
@@ -112,5 +104,13 @@
 
     <type name="Magento\Quote\Api\PaymentMethodManagementInterface">
         <plugin name="mollie_subscriptions_limit_payment_methods" type="Mollie\Subscriptions\Plugin\Quote\Api\PaymentMethodManagementPlugin" />
+    </type>
+
+    <type name="Mollie\Payment\Service\Mollie\MethodParameters">
+        <arguments>
+            <argument name="parametersParts" xsi:type="array">
+                <item name="sequenceType" xsi:type="object">Mollie\Subscriptions\Service\Mollie\MethodParameters\SequenceType</item>
+            </argument>
+        </arguments>
     </type>
 </config>

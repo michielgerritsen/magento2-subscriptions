@@ -8,12 +8,6 @@
     <event name="catalog_product_save_after">
         <observer name="mollie_subscriptions_save_subscriptions_to_product" instance="Mollie\Subscriptions\Observer\CatalogProductSaveAfter\SaveSubscriptionToProduct"/>
     </event>
-    <event name="checkout_cart_product_add_after">
-        <observer name="mollie_save_selected_subscription" instance="Mollie\Subscriptions\Observer\CheckoutCartProductAddAfter\SaveSelectedSubscription" />
-    </event>
-    <event name="catalog_product_type_prepare_full_options">
-        <observer name="mollie_add_subscription_to_options" instance="Mollie\Subscriptions\Observer\CatalogProductTypePrepareFullOptions\AddSubscriptionToProductOptions" />
-    </event>
     <event name="mollie_process_response">
         <observer name="mollie_send_mandate_to_ecurring" instance="Mollie\Subscriptions\Observer\MollieProcessResponse\SaveMandateInformation" />
     </event>
@@ -22,8 +16,5 @@
     </event>
     <event name="checkout_allow_guest">
         <observer name="mollie_subscriptions_force_customer_login" instance="Mollie\Subscriptions\Observer\CheckoutAllowGuest\ForceCustomerLoginWhenSubscriptionItemInCart" />
-    </event>
-    <event name="checkout_cart_product_add_before">
-        <observer name="mollie_subscriptions_force_subscription_products" instance="Mollie\Subscriptions\Observer\CheckoutCartProductAddBefore\CheckTheAddedProductIsASubscriptionproduct" />
     </event>
 </config>

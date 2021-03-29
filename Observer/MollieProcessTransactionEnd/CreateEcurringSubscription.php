@@ -60,6 +60,9 @@ class CreateEcurringSubscription implements ObserverInterface
 
     public function execute(Observer $observer)
     {
+        // TODO: Rewrite to Mollie Subscriptions
+
+
         /** @var OrderInterface $order */
         $order = $observer->getData('order');
 

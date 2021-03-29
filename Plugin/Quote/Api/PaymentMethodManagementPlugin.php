@@ -14,13 +14,16 @@ use Mollie\Subscriptions\Service\Cart\CartContainsSubscriptionProduct;
 class PaymentMethodManagementPlugin
 {
     const ALLOWED_METHODS = [
-        'mollie_methods_ideal',
         'mollie_methods_bancontact',
         'mollie_methods_belfius',
-        'mollie_methods_sofort',
-        'mollie_methods_kbc',
+        'mollie_methods_creditcard',
+        'mollie_methods_eps',
         'mollie_methods_giropay',
-        'mollie_methods_inghomepay',
+        'mollie_methods_ideal',
+        'mollie_methods_kbc',
+        'mollie_methods_mybank',
+        'mollie_methods_paypal',
+        'mollie_methods_sofort',
     ];
 
     /**
