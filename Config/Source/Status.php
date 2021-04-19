@@ -7,6 +7,7 @@
 namespace Mollie\Subscriptions\Config\Source;
 
 use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
+use Magento\Framework\DB\Ddl\Table;
 
 class Status extends AbstractSource
 {
@@ -25,5 +26,23 @@ class Status extends AbstractSource
                 'label' => __('Disabled'),
             ],
         ];
+    }
+
+    public function getFlatColumns()
+    {
+        $columns = [];
+        $attributeCode = $this->getAttribute()->getAttributeCode();
+
+        $type = Table::TYPE_INTEGER;
+        $columns[$attributeCode] = [
+            'type' => $type,
+            'unsigned' => false,
+            'nullable' => true,
+            'default' => null,
+            'extra' => null,
+            'comment' => $attributeCode . ' column',
+        ];
+
+        return $columns;
     }
 }

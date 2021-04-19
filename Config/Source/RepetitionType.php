@@ -7,6 +7,7 @@
 namespace Mollie\Subscriptions\Config\Source;
 
 use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
+use Magento\Framework\DB\Ddl\Table;
 
 class RepetitionType extends AbstractSource
 {
@@ -29,5 +30,23 @@ class RepetitionType extends AbstractSource
                 'label' => __('Infinite'),
             ],
         ];
+    }
+
+    public function getFlatColumns()
+    {
+        $columns = [];
+        $attributeCode = $this->getAttribute()->getAttributeCode();
+
+        $type = Table::TYPE_TEXT;
+        $columns[$attributeCode] = [
+            'type' => $type,
+            'unsigned' => false,
+            'nullable' => true,
+            'default' => null,
+            'extra' => null,
+            'comment' => $attributeCode . ' column',
+        ];
+
+        return $columns;
     }
 }

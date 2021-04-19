@@ -12,8 +12,9 @@ class CartContainsSubscriptionProduct
 {
     public function check(CartInterface $cart): bool
     {
-        foreach ($cart->getItems() as $item) {
-            if ($item->getProduct()->getMollieSubscriptionProduct()) {
+        $items = $cart->getItemsCollection()->getItems();
+        foreach ($items as $item) {
+            if ($item->getProduct()->getData('mollie_subscription_product')) {
                 return true;
             }
         }

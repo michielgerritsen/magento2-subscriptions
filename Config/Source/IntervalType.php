@@ -7,6 +7,7 @@
 namespace Mollie\Subscriptions\Config\Source;
 
 use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
+use Magento\Framework\DB\Ddl\Table;
 
 class IntervalType extends AbstractSource
 {
@@ -34,5 +35,23 @@ class IntervalType extends AbstractSource
                 'label' => __('Month(s)'),
             ],
         ];
+    }
+
+    public function getFlatColumns()
+    {
+        $columns = [];
+        $attributeCode = $this->getAttribute()->getAttributeCode();
+
+        $type = Table::TYPE_TEXT;
+        $columns[$attributeCode] = [
+            'type' => $type,
+            'unsigned' => false,
+            'nullable' => true,
+            'default' => null,
+            'extra' => null,
+            'comment' => $attributeCode . ' column',
+        ];
+
+        return $columns;
     }
 }

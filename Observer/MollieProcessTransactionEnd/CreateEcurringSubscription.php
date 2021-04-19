@@ -20,11 +20,6 @@ use Mollie\Subscriptions\Service\EcurringApi;
 class CreateEcurringSubscription implements ObserverInterface
 {
     /**
-     * @var EcurringApi
-     */
-    private $ecurringApi;
-
-    /**
      * @var OrderMandateRepositoryInterface
      */
     private $mandateRepository;

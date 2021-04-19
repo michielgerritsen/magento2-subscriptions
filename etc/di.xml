@@ -88,12 +88,6 @@
         </arguments>
     </type>
 
-    <type name="Mollie\Subscriptions\Observer\MollieProcessResponse\SaveMandateInformation">
-        <arguments>
-            <argument name="session" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
-        </arguments>
-    </type>
-
     <type name="Mollie\Subscriptions\Controller\Index\Index">
         <plugin name="authentication" type="Magento\Sales\Controller\Order\Plugin\Authentication"/>
     </type>

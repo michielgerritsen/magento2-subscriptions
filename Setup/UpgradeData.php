@@ -13,7 +13,6 @@ use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\UpgradeDataInterface;
-use Mollie\Subscriptions\Config\Source\IntervalRepetition;
 use Mollie\Subscriptions\Config\Source\IntervalType;
 use Mollie\Subscriptions\Config\Source\RepetitionType;
 use Mollie\Subscriptions\Config\Source\Status;
@@ -64,12 +63,12 @@ class UpgradeData implements UpgradeDataInterface
                     'input' => 'boolean',
                     'required' => false,
                     'sort_order' => 10,
-                    'global' => ScopedAttributeInterface::SCOPE_GLOBAL,
-                    'is_used_in_grid' => false,
+                    'global' => ScopedAttributeInterface::SCOPE_STORE,
+                    'is_used_in_grid' => true,
                     'is_visible_in_grid' => false,
                     'is_filterable_in_grid' => false,
                     'visible' => true,
-                    'visible_on_front' => false,
+                    'visible_on_front' => true,
                     'frontend' => '',
                     'class' => '',
                     'source' => Status::class,
@@ -85,18 +84,18 @@ class UpgradeData implements UpgradeDataInterface
                 'mollie_subscription_interval_amount',
                 [
                     'group' => 'Mollie',
-                    'type' => 'decimal',
+                    'type' => 'int',
                     'label' => 'Repeat Payment Every',
                     'input' => 'text',
                     'required' => false,
                     'sort_order' => 20,
-                    'global' => ScopedAttributeInterface::SCOPE_GLOBAL,
+                    'global' => ScopedAttributeInterface::SCOPE_STORE,
                     'is_used_in_grid' => false,
                     'is_visible_in_grid' => false,
                     'is_filterable_in_grid' => false,
                     'visible' => true,
                     'is_html_allowed_on_front' => false,
-                    'visible_on_front' => false
+                    'visible_on_front' => true,
                 ]
             );
         }
@@ -113,13 +112,13 @@ class UpgradeData implements UpgradeDataInterface
                     'source' => IntervalType::class,
                     'required' => false,
                     'sort_order' => 30,
-                    'global' => ScopedAttributeInterface::SCOPE_GLOBAL,
+                    'global' => ScopedAttributeInterface::SCOPE_STORE,
                     'is_used_in_grid' => false,
                     'is_visible_in_grid' => false,
                     'is_filterable_in_grid' => false,
                     'visible' => true,
                     'is_html_allowed_on_front' => false,
-                    'visible_on_front' => false
+                    'visible_on_front' => true,
                 ]
             );
         }
@@ -130,18 +129,18 @@ class UpgradeData implements UpgradeDataInterface
                 'mollie_subscription_repetition_amount',
                 [
                     'group' => 'Mollie',
-                    'type' => 'decimal',
+                    'type' => 'int',
                     'label' => 'Repeat Payment',
                     'input' => 'text',
                     'required' => false,
                     'sort_order' => 40,
-                    'global' => ScopedAttributeInterface::SCOPE_GLOBAL,
+                    'global' => ScopedAttributeInterface::SCOPE_STORE,
                     'is_used_in_grid' => false,
                     'is_visible_in_grid' => false,
                     'is_filterable_in_grid' => false,
                     'visible' => true,
                     'is_html_allowed_on_front' => false,
-                    'visible_on_front' => false
+                    'visible_on_front' => true,
                 ]
             );
         }
@@ -158,13 +157,13 @@ class UpgradeData implements UpgradeDataInterface
                     'source' => RepetitionType::class,
                     'required' => false,
                     'sort_order' => 50,
-                    'global' => ScopedAttributeInterface::SCOPE_GLOBAL,
+                    'global' => ScopedAttributeInterface::SCOPE_STORE,
                     'is_used_in_grid' => false,
                     'is_visible_in_grid' => false,
                     'is_filterable_in_grid' => false,
                     'visible' => true,
                     'is_html_allowed_on_front' => false,
-                    'visible_on_front' => false
+                    'visible_on_front' => true,
                 ]
             );
         }
