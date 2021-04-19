@@ -1,8 +1,8 @@
 ---
-name: Bug
-about: Internal Bug Report
+name: Bug report
+about: Create a report to help us improve
 title: ''
-labels: 'bug, open'
+labels: ''
 assignees: ''
 
 ---
@@ -10,12 +10,10 @@ assignees: ''
 **Describe the bug**
 A clear and concise description of what the bug is.
 
-**Used branch**
-- *Branch*:
-
-**Reproducible on this environment**
-- *Link to env*:
-- *User login to frontend*: n/a
+**Used versions**
+- *Magento Version number(eg 2.3.5)*:
+- *Open source/Enterprise/B2b*:
+- *Mollie version number (Check configuration)*:
 
 **To Reproduce**
 Steps to reproduce the behavior:
@@ -31,7 +29,7 @@ A clear and concise description of what you expected to happen.
 A clear and concise description of what actually happens.
 
 **Screenshots**
-Adding screenshots is required!
+If applicable, add screenshots to help explain your problem.
 
-**What needs to be done to fix this issue**
+**Additional context**
 Add any other context about the problem here.

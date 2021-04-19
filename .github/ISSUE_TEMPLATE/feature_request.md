@@ -1,14 +1,15 @@
 ---
-name: Feature
-about: Internal Feature Request
+name: Feature request
+about: Suggest an idea for this project
 title: ''
-labels: 'feature, open'
+labels: ''
 assignees: ''
 
 ---
 
-**Describe the feature**
-A clear and concise description of what the feature is.
+# Describe the new feature
+A clear and concise description of the new feature.
+## Describe the solution to be implemented
 
 **Backend changes**
 A clear and concise description of the new feature in the backend.
