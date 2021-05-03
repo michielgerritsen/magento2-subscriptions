@@ -6,10 +6,7 @@
 
 namespace Mollie\Subscriptions\Controller\Index;
 
-use Magento\Checkout\Controller\Action;
-use Magento\Customer\Api\AccountManagementInterface;
-use Magento\Customer\Api\CustomerRepositoryInterface;
-use Magento\Customer\Model\Session;
+use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 
@@ -22,13 +19,9 @@ class Index extends Action
 
     public function __construct(
         Context $context,
-        Session $customerSession,
-        CustomerRepositoryInterface $customerRepository,
-        AccountManagementInterface $accountManagement,
         PageFactory $resultPageFactory
     ) {
-        parent::__construct($context, $customerSession, $customerRepository, $accountManagement);
-
+        parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
     }
 

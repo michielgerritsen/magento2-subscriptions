@@ -8,8 +8,16 @@
 ?>
 
 <?php foreach ($block->getSubscriptions() as $subscription): ?>
-    <?php $plan = $subscription->getPlan()->getName() . ' - ' . $subscription->getPlan()->getDescription(); ?>
-    Plan: <?= $block->escapeHtml($plan); ?><br>
-    Started: <?= $block->escapeHtml($subscription->getStartDate()); ?><br>
+    <?=$subscription->getId(); ?> -
+    <?=$subscription->getAmount(); ?> -
+    <?=$subscription->getStatus(); ?> -
+    <?=$subscription->getDescription(); ?>
+
+    <?php if ($subscription->getStatus() == 'active'): ?>
+        -
+        <a href="<?=$this->getUrl('mollie_subscriptions/index/cancel', ['subscription_id' => $subscription->getId()]); ?>">
+            Cancel
+        </a>
+    <?php endif; ?>
     <br>
 <?php endforeach; ?>

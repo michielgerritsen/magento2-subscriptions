@@ -37,9 +37,29 @@ class SubscriptionResponse
         return $this->subscription;
     }
 
-    public function getCustomAttributes()
+    public function getId()
     {
-        return [];
+        return $this->subscription->id;
+    }
+
+    public function getAmount()
+    {
+        return $this->subscription->amount->value;
+    }
+
+    public function getStatus()
+    {
+        return $this->subscription->status;
+    }
+
+    public function getDescription()
+    {
+        return $this->subscription->description;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->subscription->createdAt;
     }
 
     public function toArray()
