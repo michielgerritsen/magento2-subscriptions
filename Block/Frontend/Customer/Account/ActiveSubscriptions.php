@@ -17,21 +17,16 @@ class ActiveSubscriptions extends Template
      */
     private $currentCustomer;
 
-    /**
-     * @var EcurringApi
-     */
-    private $ecurringApi;
-
+    // TODO
     public function __construct(
         Template\Context $context,
         CurrentCustomer $currentCustomer,
-        EcurringApi $ecurringApi,
+//        EcurringApi $ecurringApi,
         array $data = []
     ) {
         parent::__construct($context, $data);
 
         $this->currentCustomer = $currentCustomer;
-        $this->ecurringApi = $ecurringApi;
     }
 
     public function getSubscriptions()
@@ -42,6 +37,6 @@ class ActiveSubscriptions extends Template
             return [];
         }
 
-        return $this->ecurringApi->getSubscriptionsForCustomer($extensionAttributes->getMollieSubscriptionCustomerId());
+//        return $this->ecurringApi->getSubscriptionsForCustomer($extensionAttributes->getMollieSubscriptionCustomerId());
     }
 }

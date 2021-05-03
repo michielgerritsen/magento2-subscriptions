@@ -56,7 +56,7 @@ class SubscriptionOptions
         return $options;
     }
 
-    private function createSubscriptionFor(OrderItemInterface $orderItem)
+    private function createSubscriptionFor(OrderItemInterface $orderItem): array
     {
         $this->options = [];
         $this->orderItem = $orderItem;

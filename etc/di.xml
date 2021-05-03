@@ -14,19 +14,9 @@
     <preference for="Mollie\Subscriptions\Api\DataSample\DataInterface" type="Mollie\Subscriptions\Model\DataSample\Data"/>
     <preference for="Mollie\Subscriptions\Api\DataSample\SearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
 
-    <preference for="Mollie\Subscriptions\Api\SubscriptionToProductRepositoryInterface" type="Mollie\Subscriptions\Model\SubscriptionToProductRepository"/>
-    <preference for="Mollie\Subscriptions\Api\Data\SubscriptionToProductInterface" type="Mollie\Subscriptions\Model\Data\SubscriptionToProduct"/>
-    <preference for="Mollie\Subscriptions\Api\Data\SubscriptionToProductSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
-
-    <preference for="Mollie\Subscriptions\Api\OrderMandateRepositoryInterface" type="Mollie\Subscriptions\Model\OrderMandateRepository"/>
-    <preference for="Mollie\Subscriptions\Api\Data\OrderMandateInterface" type="Mollie\Subscriptions\Model\Data\OrderMandate"/>
-    <preference for="Mollie\Subscriptions\Api\Data\OrderMandateSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
-
     <preference for="Mollie\Subscriptions\Api\MollieSubscriptionCustomerRepositoryInterface" type="Mollie\Subscriptions\Model\MollieSubscriptionCustomerRepository"/>
     <preference for="Mollie\Subscriptions\Api\Data\MollieSubscriptionCustomerInterface" type="Mollie\Subscriptions\Model\Data\MollieSubscriptionCustomer"/>
     <preference for="Mollie\Subscriptions\Api\Data\CustomerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
-
-    <preference for="Mollie\Subscriptions\Api\Data\SubscriptionCartItemInterface" type="Mollie\Subscriptions\DTO\SubscriptionCartItem" />
 
     <type name="Mollie\Subscriptions\Logger\Handler">
         <arguments>

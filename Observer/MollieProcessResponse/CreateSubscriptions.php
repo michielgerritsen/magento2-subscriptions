@@ -10,6 +10,7 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Sales\Api\Data\OrderInterface;
 use Mollie\Api\Resources\Order as MollieOrder;
+use Mollie\Payment\Config;
 use Mollie\Payment\Model\Mollie;
 use Mollie\Subscriptions\Service\Mollie\SubscriptionOptions;
 use Mollie\Subscriptions\Service\Order\OrderContainsSubscriptionProduct;
@@ -31,14 +32,21 @@ class CreateSubscriptions implements ObserverInterface
      */
     private $subscriptionOptions;
 
+    /**
+     * @var Config
+     */
+    private $config;
+
     public function __construct(
         Mollie $mollieModel,
         OrderContainsSubscriptionProduct $orderContainsSubscriptionProduct,
-        SubscriptionOptions $subscriptionOptions
+        SubscriptionOptions $subscriptionOptions,
+        Config $config
     ) {
         $this->mollieModel = $mollieModel;
         $this->orderContainsSubscriptionProduct = $orderContainsSubscriptionProduct;
         $this->subscriptionOptions = $subscriptionOptions;
+        $this->config = $config;
     }
 
     public function execute(Observer $observer)
@@ -57,6 +65,7 @@ class CreateSubscriptions implements ObserverInterface
         $mollieApi = $this->mollieModel->getMollieApi($order->getStoreId());
         $subscriptions = $this->subscriptionOptions->forOrder($order);
         foreach ($subscriptions as $subscriptionOptions) {
+            $this->config->addToLog('request', ['customerId' => $payment->customerId, 'options' => $subscriptionOptions]);
             $mollieApi->subscriptions->createForId($payment->customerId, $subscriptionOptions);
         }
     }
