@@ -12,6 +12,8 @@ use Magento\Framework\Api\SearchCriteriaBuilderFactory;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Ui\Component\Listing;
 use Mollie\Api\Resources\Subscription;
+use Mollie\Payment\Api\Data\MollieCustomerInterface;
+use Mollie\Payment\Api\MollieCustomerRepositoryInterface;
 use Mollie\Payment\Model\Mollie;
 use Mollie\Subscriptions\DTO\SubscriptionResponse;
 
@@ -33,6 +35,11 @@ class MollieSubscriptionsListing extends Listing
     private $customerRepository;
 
     /**
+     * @var MollieCustomerRepositoryInterface
+     */
+    private $mollieCustomerRepository;
+
+    /**
      * @var CustomerInterface[]
      */
     private $customers = [];
@@ -52,6 +59,7 @@ class MollieSubscriptionsListing extends Listing
         Mollie $mollieModel,
         SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory,
         CustomerRepositoryInterface $customerRepository,
+        MollieCustomerRepositoryInterface $mollieCustomerRepository,
         array $components = [],
         array $data = []
     ) {
@@ -59,6 +67,7 @@ class MollieSubscriptionsListing extends Listing
         $this->mollieModel = $mollieModel;
         $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
         $this->customerRepository = $customerRepository;
+        $this->mollieCustomerRepository = $mollieCustomerRepository;
     }
 
     public function getDataSourceData()
@@ -94,10 +103,18 @@ class MollieSubscriptionsListing extends Listing
 
     private function preloadCustomers(array $result)
     {
-        $customerIds = array_column((array)$result, 'customerId');
+        $mollieCustomerIds = array_column($result, 'customerId');
 
         $searchCriteria = $this->searchCriteriaBuilderFactory->create();
-        $searchCriteria->addFilter('mollie_customer_id', $customerIds, 'in');
+        $searchCriteria->addFilter('mollie_customer_id', $mollieCustomerIds, 'in');
+        $result = $this->mollieCustomerRepository->getList($searchCriteria->create());
+
+        $customerIds = array_map(function (MollieCustomerInterface $customerInfo) {
+            return $customerInfo->getCustomerId();
+        }, $result->getItems());
+
+        $searchCriteria = $this->searchCriteriaBuilderFactory->create();
+        $searchCriteria->addFilter('entity_id', $customerIds, 'in');
         $this->customers = $this->customerRepository->getList($searchCriteria->create())->getItems();
     }
 
