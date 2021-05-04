@@ -64,10 +64,11 @@ class MollieSubscriptionsListing extends Listing
     public function getDataSourceData()
     {
         $api = $this->mollieModel->getMollieApi($this->getContext()->getRequestParam('filters')['store_id'] ?? null);
+        $paging = $this->getContext()->getRequestParam('paging');
 
         $result = $api->subscriptions->page(
             $this->getContext()->getRequestParam('offsetID'),
-            $this->getContext()->getRequestParam('paging')['pageSize']
+            $paging['pageSize'] ?? 20
         );
 
         $this->preloadCustomers((array)$result);
