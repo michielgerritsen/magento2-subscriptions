@@ -61,13 +61,15 @@ class Restart extends Action
 
         $this->messageManager->addSuccessMessage('The subscription has been restarted successfully');
 
-        $this->_redirect('*/*/index');
+        return $this->_redirect('*/*/index');
     }
 
     private function getMetadata(Subscription $canceledSubscription)
     {
-        if ($metadata = $canceledSubscription->metadata) {
+        if ($canceledSubscription->metadata instanceof \stdClass) {
+            $metadata = $canceledSubscription->metadata;
             $metadata->parent_id = $canceledSubscription->id;
+
             return $metadata;
         }
 

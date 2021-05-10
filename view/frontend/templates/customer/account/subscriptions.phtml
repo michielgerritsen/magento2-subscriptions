@@ -7,21 +7,6 @@
 /** @var \Mollie\Subscriptions\Block\Frontend\Customer\Account\ActiveSubscriptions $block */
 ?>
 
-<?php /**
-    <?=$subscription->getId(); ?> -
-    <?=$subscription->getAmount(); ?> -
-    <?=$subscription->getStatus(); ?> -
-    <?=$subscription->getDescription(); ?>
-
-    <?php if ($subscription->getStatus() == 'active'): ?>
-        -
-        <a href="<?=$this->getUrl('mollie_subscriptions/index/cancel', ['subscription_id' => $subscription->getId()]); ?>">
-            Cancel
-        </a>
-    <?php endif; ?>
-    <br>
-    */ ?>
-
 <div class="table-wrapper orders-history">
     <table class="data table table-order-items history" id="my-orders-table">
         <caption class="table-caption"><?= $block->escapeHtml(__('Orders')) ?></caption>
@@ -55,13 +40,13 @@
                 <td data-th="<?= $block->escapeHtml(__('Actions')) ?>" class="col actions">
                     <?php if (!$block->hasParent($subscription->getId())): ?>
                         <?php if ($subscription->getStatus() == 'active'): ?>
-                            <a href="#" data-post='{"action": "<?=$this->getUrl('mollie_subscriptions/index/cancel'); ?>", "data": {"subscription_id": "<?=$subscription->getId(); ?>", "confirmation": true, "confirmationMessage": "<?=__('Are you sure you want to delete the subscription with ID %1?', $subscription->getId()); ?>"}}' class="action delete">
+                            <a href="#" data-post='{"action": "<?=$block->getUrl('mollie_subscriptions/index/cancel'); ?>", "data": {"subscription_id": "<?=$subscription->getId(); ?>", "confirmation": true, "confirmationMessage": "<?=__('Are you sure you want to delete the subscription with ID %1?', $subscription->getId()); ?>"}}' class="action delete">
                                 <span><?= $block->escapeHtml(__('Cancel')); ?></span>
                             </a>
                         <?php endif; ?>
 
                         <?php if ($subscription->getStatus() == 'canceled'): ?>
-                            <a href="<?=$this->getUrl('mollie_subscriptions/index/restart', ['subscription_id' => $subscription->getId()]); ?>" class="action">
+                            <a href="<?=$block->getUrl('mollie_subscriptions/index/restart', ['subscription_id' => $subscription->getId()]); ?>" class="action">
                                 <span><?= $block->escapeHtml(__('Restart')); ?></span>
                             </a>
                         <?php endif; ?>

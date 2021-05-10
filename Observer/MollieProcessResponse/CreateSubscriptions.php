@@ -28,7 +28,7 @@ class CreateSubscriptions implements ObserverInterface
     private $orderContainsSubscriptionProduct;
 
     /**
-     * @var CreateSubscriptions
+     * @var SubscriptionOptions
      */
     private $subscriptionOptions;
 
