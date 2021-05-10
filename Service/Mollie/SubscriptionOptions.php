@@ -6,6 +6,7 @@
 
 namespace Mollie\Subscriptions\Service\Mollie;
 
+use Magento\Framework\UrlInterface;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\Data\OrderItemInterface;
 use Mollie\Payment\Helper\General;
@@ -34,10 +35,17 @@ class SubscriptionOptions
      */
     private $mollieHelper;
 
+    /**
+     * @var UrlInterface
+     */
+    private $urlBuilder;
+
     public function __construct(
-        General $mollieHelper
+        General $mollieHelper,
+        UrlInterface $urlBuilder
     ) {
         $this->mollieHelper = $mollieHelper;
+        $this->urlBuilder = $urlBuilder;
     }
 
     public function forOrder(OrderInterface $order): array
@@ -65,6 +73,8 @@ class SubscriptionOptions
         $this->addTimes();
         $this->addInterval();
         $this->addDescription();
+        $this->addMetadata();
+        $this->addWebhookUrl();
 
         return $this->options;
     }
@@ -102,6 +112,18 @@ class SubscriptionOptions
         $product = $this->orderItem->getProduct();
 
         $this->options['description'] = $product->getName() . ' - ' . $this->getIntervalDescription();
+    }
+
+    private function addMetadata()
+    {
+        $product = $this->orderItem->getProduct();
+
+        $this->options['metadata'] = ['sku' => $product->getSku()];
+    }
+
+    private function addWebhookUrl()
+    {
+        $this->options['webhookUrl'] = $this->urlBuilder->getUrl('mollie-subscriptions/api/webhook');
     }
 
     private function getIntervalDescription()

@@ -10,3 +10,8 @@
 "Changelog"                                                                                                              ,"Changelog"
 "Show more.","Show more."
 "Show less.","Show less."
+"Are you sure you want to delete the subscription with ID %1?","Are you sure you want to delete the subscription with ID %1?"
+"Subscription with ID "%1" has been cancelled","Subscription with ID "%1" has been cancelled"
+"My Subscriptions","My Subscriptions"
+"Restart","Restart"
+"The subscription has been restarted successfully","The subscription has been restarted successfully"

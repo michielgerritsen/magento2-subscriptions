@@ -14,10 +14,6 @@
     <preference for="Mollie\Subscriptions\Api\DataSample\DataInterface" type="Mollie\Subscriptions\Model\DataSample\Data"/>
     <preference for="Mollie\Subscriptions\Api\DataSample\SearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
 
-    <preference for="Mollie\Subscriptions\Api\MollieSubscriptionCustomerRepositoryInterface" type="Mollie\Subscriptions\Model\MollieSubscriptionCustomerRepository"/>
-    <preference for="Mollie\Subscriptions\Api\Data\MollieSubscriptionCustomerInterface" type="Mollie\Subscriptions\Model\Data\MollieSubscriptionCustomer"/>
-    <preference for="Mollie\Subscriptions\Api\Data\CustomerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
-
     <type name="Mollie\Subscriptions\Logger\Handler">
         <arguments>
             <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
@@ -80,10 +76,6 @@
 
     <type name="Mollie\Subscriptions\Controller\Index\Index">
         <plugin name="authentication" type="Magento\Sales\Controller\Order\Plugin\Authentication"/>
-    </type>
-
-    <type name="Magento\Customer\Api\CustomerRepositoryInterface">
-        <plugin name="mollie_subscriptions_customer" type="Mollie\Subscriptions\Plugin\Customer\SubscriptionCustomerId" />
     </type>
 
     <type name="Magento\Quote\Api\PaymentMethodManagementInterface">

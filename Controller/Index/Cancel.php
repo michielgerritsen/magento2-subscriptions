@@ -36,6 +36,10 @@ class Cancel extends Action
 
     public function execute()
     {
+        if ($this->getRequest()->getMethod() != 'POST') {
+            throw new \Exception('Method not allowed');
+        }
+
         $customer = $this->currentCustomer->getCustomer();
         $extensionAttributes = $customer->getExtensionAttributes();
 

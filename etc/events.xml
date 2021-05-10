@@ -9,7 +9,7 @@
         <observer name="mollie_subscriptions_save_subscriptions_to_product" instance="Mollie\Subscriptions\Observer\CatalogProductSaveAfter\SaveSubscriptionToProduct"/>
     </event>
     <event name="mollie_process_response">
-        <observer name="mollie_send_mandate_to_ecurring" instance="Mollie\Subscriptions\Observer\MollieProcessResponse\CreateSubscriptions" />
+        <observer name="mollie_create_subscription" instance="Mollie\Subscriptions\Observer\MollieProcessResponse\CreateSubscriptions" />
     </event>
     <event name="checkout_allow_guest">
         <observer name="mollie_subscriptions_force_customer_login" instance="Mollie\Subscriptions\Observer\CheckoutAllowGuest\ForceCustomerLoginWhenSubscriptionItemInCart" />

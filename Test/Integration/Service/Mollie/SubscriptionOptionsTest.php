@@ -105,6 +105,54 @@ class SubscriptionOptionsTest extends IntegrationTestCase
         $this->assertStringContainsString($expected, $subscription['description']);
     }
 
+    /**
+     * @magentoDataFixture Magento/Sales/_files/order.php
+     */
+    public function testAddsSku()
+    {
+        $order = $this->loadOrder('100000001');
+        $items = $order->getItems();
+        $item = array_shift($items)->getProduct();
+
+        $item->setData('sku', 'example-sku');
+        $item->setData('mollie_subscription_product', 1);
+        $item->setData('mollie_subscription_interval_amount', 5);
+        $item->setData('mollie_subscription_interval_type', IntervalType::MONTHS);
+
+        /** @var SubscriptionOptions $instance */
+        $instance = $this->objectManager->create(SubscriptionOptions::class);
+        $result = $instance->forOrder($order);
+
+        $this->assertCount(1, $result);
+        $subscription = $result[0];
+        $this->assertArrayHasKey('metadata', $subscription);
+        $this->assertArrayHasKey('sku', $subscription['metadata']);
+        $this->assertEquals('example-sku', $subscription['metadata']['sku']);
+    }
+
+    /**
+     * @magentoDataFixture Magento/Sales/_files/order.php
+     */
+    public function testAddsTheWebhookUrl()
+    {
+        $order = $this->loadOrder('100000001');
+        $items = $order->getItems();
+        $item = array_shift($items)->getProduct();
+
+        $item->setData('mollie_subscription_product', 1);
+        $item->setData('mollie_subscription_interval_amount', 5);
+        $item->setData('mollie_subscription_interval_type', IntervalType::MONTHS);
+
+        /** @var SubscriptionOptions $instance */
+        $instance = $this->objectManager->create(SubscriptionOptions::class);
+        $result = $instance->forOrder($order);
+
+        $this->assertCount(1, $result);
+        $subscription = $result[0];
+        $this->assertArrayHasKey('webhookUrl', $subscription);
+        $this->assertStringContainsString('api/webhook', $subscription['webhookUrl']);
+    }
+
     public function includesTheCorrectIntervalProvider()
     {
         return [

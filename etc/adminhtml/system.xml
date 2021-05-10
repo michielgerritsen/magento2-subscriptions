@@ -10,7 +10,7 @@
     <system>
         <section id="Mollie_Subscriptions" translate="label" type="text" sortOrder="50" showInDefault="1"
                  showInWebsite="1" showInStore="1">
-            <label>eCurring</label>
+            <label>Subscriptions</label>
             <tab>mollie</tab>
             <resource>Mollie_Subscriptions::config</resource>
             <include path="Mollie_Subscriptions::system/branding.xml"/>

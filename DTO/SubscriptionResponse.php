@@ -57,6 +57,16 @@ class SubscriptionResponse
         return $this->subscription->description;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getParentId()
+    {
+        return $this->subscription->metadata && isset($this->subscription->metadata->parent_id) ?
+            $this->subscription->metadata->parent_id :
+            null;
+    }
+
     public function getCreatedAt()
     {
         return $this->subscription->createdAt;
