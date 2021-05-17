@@ -66,6 +66,9 @@ class Restart extends Action
 
     private function getMetadata(Subscription $canceledSubscription)
     {
+        // Ignore as it has the wrong doctype:
+        // https://github.com/mollie/mollie-api-php/pull/554
+        // @phpstan-ignore-next-line
         if ($canceledSubscription->metadata instanceof \stdClass) {
             $metadata = $canceledSubscription->metadata;
             $metadata->parent_id = $canceledSubscription->id;

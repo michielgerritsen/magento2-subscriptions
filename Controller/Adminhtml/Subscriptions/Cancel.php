@@ -36,6 +36,6 @@ class Cancel extends Action
             __('Subscription with ID "%1" has been cancelled', $subscriptionId)
         );
 
-        $this->_redirect('*/*/');
+        return $this->_redirect('*/*/');
     }
 }

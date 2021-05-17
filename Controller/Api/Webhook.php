@@ -12,6 +12,7 @@ use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
+use Magento\Framework\Controller\ResultFactory;
 use Magento\Quote\Api\CartManagementInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\AddressInterface;
@@ -49,7 +50,7 @@ class Webhook extends Action
     private $cartManagement;
 
     /**
-     * @var GuestCartRepositoryInterface
+     * @var CartRepositoryInterface
      */
     private $cartRepository;
 
@@ -113,7 +114,7 @@ class Webhook extends Action
                 $this->mollie->processTransaction($orderId, 'webhook');
             }
 
-            return;
+            return $this->returnOkResponse();
         }
 
         $api = $this->mollie->getMollieApi();
@@ -138,6 +139,7 @@ class Webhook extends Action
         $this->orderRepository->save($order);
 
         $this->mollie->processTransaction($order->getId(), 'webhook');
+        return $this->returnOkResponse();
     }
 
     private function formatAddress(\Magento\Customer\Api\Data\AddressInterface $customerAddress): AddressInterface
@@ -189,5 +191,13 @@ class Webhook extends Action
         $cart->setCustomerIsGuest(0);
 
         return $cart;
+    }
+
+    private function returnOkResponse()
+    {
+        $result = $this->resultFactory->create(ResultFactory::TYPE_RAW);
+        $result->setHeader('content-type', 'text/plain');
+        $result->setContents('OK');
+        return $result;
     }
 }
