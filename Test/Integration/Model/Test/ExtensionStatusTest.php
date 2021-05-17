@@ -8,17 +8,12 @@ declare(strict_types=1);
 namespace Mollie\Subscriptions\Test\Integration\Model\Test;
 
 use Magento\Framework\App\ObjectManager;
+use Mollie\Payment\Test\Integration\IntegrationTestCase;
 use Mollie\Subscriptions\Config;
 use Mollie\Subscriptions\Service\Test\ExtensionStatus;
-use PHPUnit\Framework\TestCase;
 
-class ExtensionStatusTest extends TestCase
+class ExtensionStatusTest extends IntegrationTestCase
 {
-    /**
-     * @var ObjectManager
-     */
-    private $objectManager;
-
     public function testReturnsErrorWhenTheModuleIsDisabled()
     {
         $configMock = $this->createMock(Config::class);
@@ -47,10 +42,5 @@ class ExtensionStatusTest extends TestCase
         $result = $instance->execute();
 
         $this->assertEquals(ExtensionStatus::SUCCESS_MSG, $result['result_msg']);
-    }
-
-    protected function setUp()
-    {
-        $this->objectManager = ObjectManager::getInstance();
     }
 }

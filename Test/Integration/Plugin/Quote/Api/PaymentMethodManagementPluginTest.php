@@ -12,25 +12,19 @@ use Magento\Quote\Api\PaymentMethodManagementInterface;
 use Magento\TestFramework\ObjectManager;
 use Mollie\Payment\Model\Methods\Ideal;
 use Mollie\Payment\Model\Methods\Voucher;
+use Mollie\Payment\Test\Integration\IntegrationTestCase;
 use Mollie\Subscriptions\Plugin\Quote\Api\PaymentMethodManagementPlugin;
 use Mollie\Subscriptions\Service\Cart\CartContainsSubscriptionProduct;
-use PHPUnit\Framework\TestCase;
 
-class PaymentMethodManagementPluginTest extends TestCase
+class PaymentMethodManagementPluginTest extends IntegrationTestCase
 {
-    /**
-     * @var \Magento\Framework\App\ObjectManager
-     */
-    private $objectManager;
-
     /**
      * @var Session
      */
     private $session;
 
-    protected function setUp()
+    protected function setUpWithoutVoid()
     {
-        $this->objectManager = ObjectManager::getInstance();
         $this->session = $this->objectManager->create(Session::class);
     }
 
