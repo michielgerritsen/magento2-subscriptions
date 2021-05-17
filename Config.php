@@ -23,8 +23,8 @@ class Config
     const EXTENSION_CODE = 'Mollie_Subscriptions';
     const XML_PATH_EXTENSION_VERSION = 'mollie_subscriptions/general/version';
     const XML_PATH_EXTENSION_ENABLE = 'mollie_subscriptions/general/enable';
+    const XML_PATH_EXTENSION_SHIPPING_METHOD = 'mollie_subscriptions/general/shipping_method';
     const XML_PATH_DEBUG = 'mollie_subscriptions/general/debug';
-    const XML_PATH_DISABLE_ADD_TO_CART = 'mollie_subscriptions/general/disable_add_to_cart';
     const MODULE_SUPPORT_LINK = 'https://www.magmodules.eu/help/%s';
 
     /**
@@ -59,11 +59,6 @@ class Config
         $this->encryptor = $encryptor;
     }
 
-    public function getExtensionVersion(): string
-    {
-        return $this->getStoreValue(self::XML_PATH_EXTENSION_VERSION);
-    }
-
     /**
      * Get Configuration data
      *
@@ -85,6 +80,17 @@ class Config
         return (string)$this->scopeConfig->getValue($path, $scope, (int)$storeId);
     }
 
+    /**
+     * @return string
+     */
+    public function getExtensionVersion(): string
+    {
+        return $this->getStoreValue(self::XML_PATH_EXTENSION_VERSION);
+    }
+
+    /**
+     * @return StoreInterface
+     */
     public function getStore(): StoreInterface
     {
         try {
@@ -98,6 +104,9 @@ class Config
         return reset($stores);
     }
 
+    /**
+     * @return string
+     */
     public function getMagentoVersion(): string
     {
         return $this->metadata->getVersion();
@@ -121,11 +130,18 @@ class Config
         return $this->scopeConfig->isSetFlag($path, $scope, (int)$storeId);
     }
 
+    /**
+     * @return string
+     */
     public function getExtensionCode(): string
     {
         return self::EXTENSION_CODE;
     }
 
+    /**
+     * @param int|null $storeId
+     * @return bool
+     */
     public function isDebugMode(int $storeId = null): bool
     {
         $scope = $scope ?? ScopeInterface::SCOPE_STORE;
@@ -136,21 +152,22 @@ class Config
         );
     }
 
+    /**
+     * @param int|null $storeId
+     * @return bool
+     */
     public function isEnabled(int $storeId = null): bool
     {
         return $this->getFlag(self::XML_PATH_EXTENSION_ENABLE, $storeId);
     }
 
-    public function disableAddToCartButton(int $storeId = null)
+    /**
+     * @param int|null $storeId
+     * @return string
+     */
+    public function getShippingMethod(int $storeId = null): string
     {
-        return $this->getFlag(static::XML_PATH_DISABLE_ADD_TO_CART, $storeId);
-    }
-
-    public function getApiKey($storeId = null)
-    {
-        $value = $this->getStoreValue('mollie_subscriptions/general/apikey', $storeId);
-
-        return $this->encryptor->decrypt($value);
+        return $this->getStoreValue(self::XML_PATH_EXTENSION_SHIPPING_METHOD, $storeId);
     }
 
     /**

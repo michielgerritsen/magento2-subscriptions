@@ -21,23 +21,12 @@
             <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
             <config_path>mollie_subscriptions/general/enable</config_path>
         </field>
-        <field id="apikey" translate="label" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1"
+        <field id="shipping_method" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1"
                showInStore="1">
-            <label>API Key</label>
-            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
-            <config_path>mollie_subscriptions/general/apikey</config_path>
-            <depends>
-                <field id="enable">1</field>
-            </depends>
-        </field>
-        <field id="disable_add_to_cart" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1"
-               showInStore="1">
-            <label>Disable default add to cart button for subscription products</label>
-            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-            <config_path>mollie_subscriptions/general/disable_add_to_cart</config_path>
-            <depends>
-                <field id="enable">1</field>
-            </depends>
+            <label>Shipping method</label>
+            <source_model>Mollie\Subscriptions\Config\Source\ActiveShippingMethods</source_model>
+            <config_path>mollie_subscriptions/general/shipping_method</config_path>
+            <comment>This method is used when recurring orders are created.</comment>
         </field>
     </group>
 </include>

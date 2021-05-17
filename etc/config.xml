@@ -13,7 +13,6 @@
                 <version>v1.0.0</version>
                 <enable>0</enable>
                 <debug>0</debug>
-                <disable_add_to_cart>0</disable_add_to_cart>
             </general>
         </Mollie_Subscriptions>
     </default>

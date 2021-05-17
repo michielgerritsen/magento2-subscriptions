@@ -52,10 +52,10 @@ class UpgradeData implements UpgradeDataInterface
         // interval type = day, month, week
         // interval repetition = infinite/limited
 
-        if (!$eavSetup->getAttribute(Product::ENTITY, 'mollie_subscription_product')) {
+        if (!$eavSetup->getAttribute(Product::ENTITY, 'mollie_recurring_product')) {
             $eavSetup->addAttribute(
                 Product::ENTITY,
-                'mollie_subscription_product',
+                'mollie_recurring_product',
                 [
                     'group' => 'Mollie',
                     'label' => 'Is this a subscription product?',
@@ -78,10 +78,10 @@ class UpgradeData implements UpgradeDataInterface
             );
         }
 
-        if (!$eavSetup->getAttribute(Product::ENTITY, 'mollie_subscription_interval_amount')) {
+        if (!$eavSetup->getAttribute(Product::ENTITY, 'mollie_recurring_interval_amount')) {
             $eavSetup->addAttribute(
                 Product::ENTITY,
-                'mollie_subscription_interval_amount',
+                'mollie_recurring_interval_amount',
                 [
                     'group' => 'Mollie',
                     'type' => 'int',
@@ -100,10 +100,10 @@ class UpgradeData implements UpgradeDataInterface
             );
         }
 
-        if (!$eavSetup->getAttribute(Product::ENTITY, 'mollie_subscription_interval_type')) {
+        if (!$eavSetup->getAttribute(Product::ENTITY, 'mollie_recurring_interval_type')) {
             $eavSetup->addAttribute(
                 Product::ENTITY,
-                'mollie_subscription_interval_type',
+                'mollie_recurring_interval_type',
                 [
                     'group' => 'Mollie',
                     'type' => 'text',
@@ -123,10 +123,10 @@ class UpgradeData implements UpgradeDataInterface
             );
         }
 
-        if (!$eavSetup->getAttribute(Product::ENTITY, 'mollie_subscription_repetition_amount')) {
+        if (!$eavSetup->getAttribute(Product::ENTITY, 'mollie_recurring_repetition_amount')) {
             $eavSetup->addAttribute(
                 Product::ENTITY,
-                'mollie_subscription_repetition_amount',
+                'mollie_recurring_repetition_amount',
                 [
                     'group' => 'Mollie',
                     'type' => 'int',
@@ -145,10 +145,10 @@ class UpgradeData implements UpgradeDataInterface
             );
         }
 
-        if (!$eavSetup->getAttribute(Product::ENTITY, 'mollie_subscription_repetition_type')) {
+        if (!$eavSetup->getAttribute(Product::ENTITY, 'mollie_recurring_repetition_type')) {
             $eavSetup->addAttribute(
                 Product::ENTITY,
-                'mollie_subscription_repetition_type',
+                'mollie_recurring_repetition_type',
                 [
                     'group' => 'Mollie',
                     'type' => 'text',
