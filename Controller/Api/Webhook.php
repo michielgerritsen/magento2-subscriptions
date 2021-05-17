@@ -168,6 +168,7 @@ class Webhook extends Action
     {
         /** @var Subscription $subscription */
         $subscription = $api->performHttpCallToFullUrl(MollieApiClient::HTTP_GET, $mollieOrder->_links->subscription->href);
+        // @phpstan-ignore-next-line
         $sku = $subscription->metadata->sku;
         $product = $this->productRepository->get($sku);
 
