@@ -131,9 +131,11 @@ class Webhook extends Action
 
         $cart->getPayment()->addData(['method' => 'mollie_methods_' . $mollieOrder->method]);
 
+        // @phpstan-ignore-next-line
         $cart->collectTotals();
         $this->cartRepository->save($cart);
 
+        // @phpstan-ignore-next-line
         $order = $this->cartManagement->submit($cart);
         $order->setMollieTransactionId($mollieOrder->id);
         $this->orderRepository->save($order);
@@ -168,6 +170,8 @@ class Webhook extends Action
         $subscription = $api->performHttpCallToFullUrl(MollieApiClient::HTTP_GET, $mollieOrder->_links->subscription->href);
         $sku = $subscription->metadata->sku;
         $product = $this->productRepository->get($sku);
+
+        // @phpstan-ignore-next-line
         $cart->addProduct($product);
     }
 
