@@ -8,24 +8,13 @@ namespace Mollie\Subscriptions\Test\Integration\Service\Mollie\MethodParameters;
 
 use Magento\Framework\App\ObjectManager;
 use Magento\Quote\Api\Data\CartInterface;
-use Magento\Sales\Api\Data\OrderInterface;
+use Mollie\Payment\Test\Integration\IntegrationTestCase;
 use Mollie\Subscriptions\Service\Cart\CartContainsSubscriptionProduct;
 use Mollie\Subscriptions\Service\Mollie\MethodParameters\SequenceType;
 use Mollie\Subscriptions\Service\Order\OrderContainsSubscriptionProduct;
-use PHPUnit\Framework\TestCase;
 
-class SequenceTypeTest extends TestCase
+class SequenceTypeTest extends IntegrationTestCase
 {
-    /**
-     * @var ObjectManager
-     */
-    private $objectManager;
-
-    protected function setUp()
-    {
-        $this->objectManager = ObjectManager::getInstance();
-    }
-
     public function testDoesNothingWhenTheCartDoesNotContainARecurringProduct()
     {
         $orderContainsSubscriptionProductMock = $this->createMock(OrderContainsSubscriptionProduct::class);
