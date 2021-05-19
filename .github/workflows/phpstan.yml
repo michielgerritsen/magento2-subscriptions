@@ -43,4 +43,4 @@ jobs:
         run: docker exec magento-project-community-edition composer require mollie/magento2:"dev-master as 1.99.99" mollie/magento2-subscriptions:"dev-${GITHUB_REF#refs/heads/} as 1.99.99" fooman/phpstan-magento2-magic-methods:0.7.1
 
       - name: Run PHPStan
-        run: docker exec magento-project-community-edition /bin/bash -c "./vendor/bin/phpstan analyse -c /data/extensions/mollie-magento2-subscriptions/phpstan.neon /data/extensions/mollie-magento2-subscriptions"
+        run: docker exec magento-project-community-edition /bin/bash -c "./vendor/bin/phpstan analyse --debug -c /data/extensions/mollie-magento2-subscriptions/phpstan.neon /data/extensions/mollie-magento2-subscriptions"
