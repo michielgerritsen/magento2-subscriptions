@@ -84,11 +84,11 @@ class SubscriptionOptions
         return new SubscriptionOption(
             $orderItem->getProductId(),
             $this->order->getStoreId(),
-            $this->options['amount'],
-            $this->options['interval'],
-            $this->options['description'],
-            $this->options['metadata'],
-            $this->options['webhookUrl'],
+            $this->options['amount'] ?? [],
+            $this->options['interval'] ?? '',
+            $this->options['description'] ?? '',
+            $this->options['metadata'] ?? [],
+            $this->options['webhookUrl'] ?? '',
             $this->options['times'] ?? null
         );
     }

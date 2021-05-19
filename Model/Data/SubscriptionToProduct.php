@@ -127,7 +127,7 @@ class SubscriptionToProduct extends \Magento\Framework\Api\AbstractExtensibleObj
 
     /**
      * Retrieve existing extension attributes object or create a new one.
-     * @return \Mollie\Subscriptions\Api\Data\SubscriptionToProductExtensionInterface|null
+     * @return \Mollie\Subscriptions\Api\Data\SubscriptionToProductExtensionInterface|\Magento\Framework\Api\ExtensionAttributesInterface|null
      */
     public function getExtensionAttributes()
     {

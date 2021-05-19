@@ -12,7 +12,6 @@ use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Event\ManagerInterface;
 use Mollie\Payment\Config;
 use Mollie\Payment\Model\Mollie;
@@ -21,7 +20,7 @@ use Mollie\Subscriptions\Api\SubscriptionToProductRepositoryInterface;
 class Cancel extends Action implements HttpPostActionInterface
 {
     /**
-     * @var \Mollie\Subscriptions\Config
+     * @var Config
      */
     private $config;
 

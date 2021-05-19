@@ -3,7 +3,6 @@
  * Copyright Magmodules.eu. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Mollie\Subscriptions\Observer\CatalogProductSaveAfter;
 
 use Magento\Framework\Event\Observer;
