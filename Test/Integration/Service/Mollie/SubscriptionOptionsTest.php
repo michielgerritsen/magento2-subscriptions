@@ -9,6 +9,7 @@ namespace Mollie\Subscriptions\Test\Integration\Service\Mollie;
 use Mollie\Payment\Test\Integration\IntegrationTestCase;
 use Mollie\Subscriptions\Config\Source\IntervalType;
 use Mollie\Subscriptions\Config\Source\RepetitionType;
+use Mollie\Subscriptions\DTO\SubscriptionOption;
 use Mollie\Subscriptions\Service\Mollie\SubscriptionOptions;
 
 class SubscriptionOptionsTest extends IntegrationTestCase
@@ -31,7 +32,8 @@ class SubscriptionOptionsTest extends IntegrationTestCase
 
         $this->assertCount(1, $result);
         $subscription = $result[0];
-        $this->assertArrayNotHasKey('times', $subscription);
+        $this->assertInstanceOf(SubscriptionOption::class, $subscription);
+        $this->assertArrayNotHasKey('times', $subscription->toArray());
     }
 
     /**
@@ -53,8 +55,9 @@ class SubscriptionOptionsTest extends IntegrationTestCase
 
         $this->assertCount(1, $result);
         $subscription = $result[0];
-        $this->assertArrayHasKey('times', $subscription);
-        $this->assertSame(10, $subscription['times']);
+        $this->assertInstanceOf(SubscriptionOption::class, $subscription);
+        $this->assertArrayHasKey('times', $subscription->toArray());
+        $this->assertSame(10, $subscription->toArray()['times']);
     }
 
     /**
@@ -77,8 +80,9 @@ class SubscriptionOptionsTest extends IntegrationTestCase
 
         $this->assertCount(1, $result);
         $subscription = $result[0];
-        $this->assertArrayHasKey('interval', $subscription);
-        $this->assertSame($expected, $subscription['interval']);
+        $this->assertInstanceOf(SubscriptionOption::class, $subscription);
+        $this->assertArrayHasKey('interval', $subscription->toArray());
+        $this->assertSame($expected, $subscription->toArray()['interval']);
     }
 
     /**
@@ -101,8 +105,9 @@ class SubscriptionOptionsTest extends IntegrationTestCase
 
         $this->assertCount(1, $result);
         $subscription = $result[0];
-        $this->assertArrayHasKey('description', $subscription);
-        $this->assertStringContainsString($expected, $subscription['description']);
+        $this->assertInstanceOf(SubscriptionOption::class, $subscription);
+        $this->assertArrayHasKey('description', $subscription->toArray());
+        $this->assertStringContainsString($expected, $subscription->toArray()['description']);
     }
 
     /**
@@ -125,9 +130,35 @@ class SubscriptionOptionsTest extends IntegrationTestCase
 
         $this->assertCount(1, $result);
         $subscription = $result[0];
-        $this->assertArrayHasKey('metadata', $subscription);
-        $this->assertArrayHasKey('sku', $subscription['metadata']);
-        $this->assertEquals('example-sku', $subscription['metadata']['sku']);
+        $this->assertInstanceOf(SubscriptionOption::class, $subscription);
+        $this->assertArrayHasKey('metadata', $subscription->toArray());
+        $this->assertArrayHasKey('sku', $subscription->toArray()['metadata']);
+        $this->assertEquals('example-sku', $subscription->toArray()['metadata']['sku']);
+    }
+
+    /**
+     * @magentoDataFixture Magento/Sales/_files/order.php
+     */
+    public function testAddsTheAmount()
+    {
+        $order = $this->loadOrder('100000001');
+        $items = $order->getItems();
+        $item = array_shift($items);
+
+//        $item->setRowTtotalInclTax(999.98);
+        $item->setData('row_total_incl_tax', '999.98');
+        $item->getProduct()->setData('mollie_subscription_product', 1);
+
+        /** @var SubscriptionOptions $instance */
+        $instance = $this->objectManager->create(SubscriptionOptions::class);
+        $result = $instance->forOrder($order);
+
+        $this->assertCount(1, $result);
+        $subscription = $result[0];
+        $this->assertInstanceOf(SubscriptionOption::class, $subscription);
+        $this->assertArrayHasKey('amount', $subscription->toArray());
+        $this->assertArrayHasKey('value', $subscription->toArray()['amount']);
+        $this->assertEquals('999.98', $subscription->toArray()['amount']['value']);
     }
 
     /**
@@ -149,8 +180,9 @@ class SubscriptionOptionsTest extends IntegrationTestCase
 
         $this->assertCount(1, $result);
         $subscription = $result[0];
-        $this->assertArrayHasKey('webhookUrl', $subscription);
-        $this->assertStringContainsString('api/webhook', $subscription['webhookUrl']);
+        $this->assertInstanceOf(SubscriptionOption::class, $subscription);
+        $this->assertArrayHasKey('webhookUrl', $subscription->toArray());
+        $this->assertStringContainsString('api/webhook', $subscription->toArray()['webhookUrl']);
     }
 
     public function includesTheCorrectIntervalProvider()
@@ -168,6 +200,7 @@ class SubscriptionOptionsTest extends IntegrationTestCase
     public function addsADescriptionProvider()
     {
         return [
+            'single day' => [['amount' => 1, 'type' => IntervalType::DAYS], 'Every day'],
             'day' => [['amount' => 7, 'type' => IntervalType::DAYS], 'Every 7 days'],
             'single week' => [['amount' => 1, 'type' => IntervalType::WEEKS], 'Every week'],
             'multiple weeks' => [['amount' => 3, 'type' => IntervalType::WEEKS], 'Every 3 weeks'],

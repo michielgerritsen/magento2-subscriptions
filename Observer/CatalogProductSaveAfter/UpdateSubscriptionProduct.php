@@ -8,27 +8,19 @@ namespace Mollie\Subscriptions\Observer\CatalogProductSaveAfter;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
-use Mollie\Payment\Helper\General;
-use Mollie\Payment\Model\Mollie;
+use Mollie\Subscriptions\Api\SubscriptionToProductRepositoryInterface;
 
 class UpdateSubscriptionProduct implements ObserverInterface
 {
     /**
-     * @var Mollie
+     * @var SubscriptionToProductRepositoryInterface
      */
-    private $mollie;
-
-    /**
-     * @var General
-     */
-    private $mollieHelper;
+    private $subscriptionToProductRepository;
 
     public function __construct(
-        Mollie $mollie,
-        General $mollieHelper
+        SubscriptionToProductRepositoryInterface $subscriptionToProductRepository
     ) {
-        $this->mollie = $mollie;
-        $this->mollieHelper = $mollieHelper;
+        $this->subscriptionToProductRepository = $subscriptionToProductRepository;
     }
 
     public function execute(Observer $observer)
@@ -40,6 +32,6 @@ class UpdateSubscriptionProduct implements ObserverInterface
             return;
         }
 
-        // TODO: Implement
+        $this->subscriptionToProductRepository->productHasPriceUpdate($product);
     }
 }

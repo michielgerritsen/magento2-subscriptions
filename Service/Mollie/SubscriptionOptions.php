@@ -12,6 +12,7 @@ use Magento\Sales\Api\Data\OrderItemInterface;
 use Mollie\Payment\Helper\General;
 use Mollie\Subscriptions\Config\Source\IntervalType;
 use Mollie\Subscriptions\Config\Source\RepetitionType;
+use Mollie\Subscriptions\DTO\SubscriptionOption;
 
 class SubscriptionOptions
 {
@@ -48,6 +49,10 @@ class SubscriptionOptions
         $this->urlBuilder = $urlBuilder;
     }
 
+    /**
+     * @param OrderInterface $order
+     * @return SubscriptionOption[]
+     */
     public function forOrder(OrderInterface $order): array
     {
         $options = [];
@@ -64,7 +69,7 @@ class SubscriptionOptions
         return $options;
     }
 
-    private function createSubscriptionFor(OrderItemInterface $orderItem): array
+    private function createSubscriptionFor(OrderItemInterface $orderItem): SubscriptionOption
     {
         $this->options = [];
         $this->orderItem = $orderItem;
@@ -76,7 +81,16 @@ class SubscriptionOptions
         $this->addMetadata();
         $this->addWebhookUrl();
 
-        return $this->options;
+        return new SubscriptionOption(
+            $orderItem->getProductId(),
+            $this->order->getStoreId(),
+            $this->options['amount'],
+            $this->options['interval'],
+            $this->options['description'],
+            $this->options['metadata'],
+            $this->options['webhookUrl'],
+            $this->options['times'] ?? null
+        );
     }
 
     private function addAmount()
@@ -130,10 +144,14 @@ class SubscriptionOptions
     {
         $product = $this->orderItem->getProduct();
         $intervalType = $product->getData('mollie_subscription_interval_type');
-        $intervalAmount = $product->getData('mollie_subscription_interval_amount');
+        $intervalAmount = (int)$product->getData('mollie_subscription_interval_amount');
 
         if ($intervalType == IntervalType::DAYS) {
-            return __('Every %1 day(s)', $intervalAmount);
+            if ($intervalAmount == 1) {
+                return __('Every day', $intervalAmount);
+            }
+
+            return __('Every %1 days', $intervalAmount);
         }
 
         if ($intervalType == IntervalType::WEEKS) {

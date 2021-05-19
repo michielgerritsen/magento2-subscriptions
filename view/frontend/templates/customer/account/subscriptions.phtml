@@ -46,7 +46,7 @@
                         <?php endif; ?>
 
                         <?php if ($subscription->getStatus() == 'canceled'): ?>
-                            <a href="<?=$block->getUrl('mollie_subscriptions/index/restart', ['subscription_id' => $subscription->getId()]); ?>" class="action">
+                            <a href="#" data-post='{"action": "<?=$block->getUrl('mollie_subscriptions/index/restart'); ?>", "data": {"subscription_id": "<?=$subscription->getId(); ?>"}}' class="action">
                                 <span><?= $block->escapeHtml(__('Restart')); ?></span>
                             </a>
                         <?php endif; ?>

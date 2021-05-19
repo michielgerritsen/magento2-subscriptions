@@ -5,48 +5,15 @@
   -->
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    <!-- Declaration Schema of Data Sample Table -->
-    <table name="data_sample" engine="innodb" resource="default" comment="Data Sample Table">
-        <column name="entity_id"
-                xsi:type="int"
-                padding="10"
-                identity="true"
-                nullable="false"
-                unsigned="true"
-                comment="Entity ID"/>
-        <column name="store_id"
-                xsi:type="smallint"
-                padding="5"
-                nullable="true"
-                unsigned="true"
-                identity="false"
-                default="0"
-                comment="Store ID"/>
-        <column name="value"
-                xsi:type="varchar"
-                length="255"
-                nullable="true"
-                comment="Value"/>
-        <column name="created_at"
-                xsi:type="timestamp"
-                on_update="false"
-                default="CURRENT_TIMESTAMP"
-                comment="Created At"/>
-        <column name="updated_at"
-                xsi:type="timestamp"
-                on_update="true"
-                default="CURRENT_TIMESTAMP"
-                comment="Updated At"/>
-        <constraint referenceId="PRIMARY" xsi:type="primary">
+    <table name="mollie_subscription_to_product" engine="innodb" comment="mollie_subscription_to_product">
+        <column name="entity_id" xsi:type="int" comment="entity_id" nullable="true" identity="true" unsigned="true" padding="10"/>
+        <column name="customer_id" xsi:type="text" comment="customer_id" nullable="true"/>
+        <column name="subscription_id" xsi:type="text" comment="subscription_id" nullable="true"/>
+        <column name="product_id" xsi:type="int" comment="product_id" nullable="true"/>
+        <column name="store_id" xsi:type="int" comment="store_id" nullable="false"/>
+        <column name="has_price_update" xsi:type="int" comment="has_price_update" nullable="false" default="0"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
         </constraint>
-        <constraint referenceId="ACCOUNTING_ORDER_STORE_ID_STORE_STORE_ID"
-                    xsi:type="foreign"
-                    table="data_sample"
-                    column="store_id"
-                    referenceTable="store"
-                    referenceColumn="store_id"
-                    onDelete="SET NULL"/>
     </table>
-
 </schema>
