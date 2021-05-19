@@ -4,20 +4,17 @@
  *  See COPYING.txt for license details.
  */
 
-namespace Mollie\Subscriptions\Setup;
+namespace Mollie\Subscriptions\Setup\Patch\Data;
 
 use Magento\Catalog\Model\Product;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
-use Magento\Eav\Setup\EavSetup;
 use Magento\Eav\Setup\EavSetupFactory;
-use Magento\Framework\Setup\ModuleContextInterface;
-use Magento\Framework\Setup\ModuleDataSetupInterface;
-use Magento\Framework\Setup\UpgradeDataInterface;
+use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Mollie\Subscriptions\Config\Source\IntervalType;
 use Mollie\Subscriptions\Config\Source\RepetitionType;
 use Mollie\Subscriptions\Config\Source\Status;
 
-class UpgradeData implements UpgradeDataInterface
+class SubscriptionAttributes implements DataPatchInterface
 {
     /**
      * @var EavSetupFactory
@@ -30,21 +27,7 @@ class UpgradeData implements UpgradeDataInterface
         $this->eavSetupFactory = $eavSetupFactory;
     }
 
-    public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
-    {
-        $setup->startSetup();
-
-        /** @var EavSetup $eavSetup */
-        $eavSetup = $this->eavSetupFactory->create();
-
-        if (version_compare($context->getVersion(), '0.1.0', '<=')) {
-            $this->addProductAttribute($setup, $eavSetup);
-        }
-
-        $setup->endSetup();
-    }
-
-    private function addProductAttribute(ModuleDataSetupInterface $setup, EavSetup $eavSetup)
+    public function apply()
     {
         $eavSetup = $this->eavSetupFactory->create();
 
@@ -167,5 +150,15 @@ class UpgradeData implements UpgradeDataInterface
                 ]
             );
         }
+    }
+
+    public static function getDependencies()
+    {
+        return [];
+    }
+
+    public function getAliases()
+    {
+        return [];
     }
 }
