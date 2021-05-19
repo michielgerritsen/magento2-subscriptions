@@ -149,9 +149,6 @@ class Restart extends Action implements HttpPostActionInterface
 
     private function getMetadata(Subscription $canceledSubscription)
     {
-        // Ignore as it has the wrong doctype:
-        // https://github.com/mollie/mollie-api-php/pull/554
-        // @phpstan-ignore-next-line
         if ($canceledSubscription->metadata instanceof \stdClass) {
             $metadata = $canceledSubscription->metadata;
             $metadata->parent_id = $canceledSubscription->id;
@@ -164,9 +161,6 @@ class Restart extends Action implements HttpPostActionInterface
 
     private function saveSubscriptionResult(Subscription $subscription)
     {
-        // Ignore as it has the wrong doctype:
-        // https://github.com/mollie/mollie-api-php/pull/554
-        // @phpstan-ignore-next-line
         $productId = $this->product->getIdBySku($subscription->metadata->sku);
 
         /** @var SubscriptionToProductInterface $model */
