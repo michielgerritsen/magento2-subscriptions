@@ -10,6 +10,7 @@ use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Sales\Api\OrderRepositoryInterface;
 use Mollie\Api\MollieApiClient;
 use Mollie\Payment\Config;
 use Mollie\Payment\Model\Mollie;
@@ -58,6 +59,11 @@ class CreateSubscriptions implements ObserverInterface
     private $mollieApi;
 
     /**
+     * @var OrderRepositoryInterface
+     */
+    private $orderRepository;
+
+    /**
      * @var ManagerInterface
      */
     private $eventManager;
@@ -69,6 +75,7 @@ class CreateSubscriptions implements ObserverInterface
         SubscriptionOptions $subscriptionOptions,
         SubscriptionToProductInterfaceFactory $subscriptionToProductFactory,
         SubscriptionToProductRepositoryInterface $subscriptionToProductRepository,
+        OrderRepositoryInterface $orderRepository,
         ManagerInterface $eventManager
     ) {
         $this->config = $config;
@@ -78,13 +85,15 @@ class CreateSubscriptions implements ObserverInterface
         $this->subscriptionToProductFactory = $subscriptionToProductFactory;
         $this->subscriptionToProductRepository = $subscriptionToProductRepository;
         $this->eventManager = $eventManager;
+        $this->orderRepository = $orderRepository;
     }
 
     public function execute(Observer $observer)
     {
         /** @var OrderInterface $order */
         $order = $observer->getData('order');
-        if (!$this->orderContainsSubscriptionProduct->check($order)) {
+        if ($order->getPayment()->getAdditionalInformation('subscription_created') ||
+            !$this->orderContainsSubscriptionProduct->check($order)) {
             return;
         }
 
@@ -95,6 +104,9 @@ class CreateSubscriptions implements ObserverInterface
         foreach ($subscriptions as $subscriptionOptions) {
             $this->createSubscription($payment->customerId, $subscriptionOptions);
         }
+
+        $order->getPayment()->setAdditionalInformation('subscription_created', date('Y-m-d'));
+        $this->orderRepository->save($order);
     }
 
     private function getPayment(OrderInterface $order)
