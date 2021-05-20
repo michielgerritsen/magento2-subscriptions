@@ -4,14 +4,13 @@
  * See COPYING.txt for license details.
  */
 
-namespace Mollie\Subscriptions\Observer\MollieProcessResponse;
+namespace Mollie\Subscriptions\Observer\MollieProcessTransactionEnd;
 
 use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Sales\Api\Data\OrderInterface;
 use Mollie\Api\MollieApiClient;
-use Mollie\Api\Resources\Order as MollieOrder;
 use Mollie\Payment\Config;
 use Mollie\Payment\Model\Mollie;
 use Mollie\Subscriptions\Api\Data\SubscriptionToProductInterface;
@@ -89,32 +88,25 @@ class CreateSubscriptions implements ObserverInterface
             return;
         }
 
-        $payment = $this->getPayment($observer);
-        if (!$payment || !$payment->mandateId) {
-            return;
-        }
-
         $this->mollieApi = $this->mollieModel->getMollieApi($order->getStoreId());
+        $payment = $this->getPayment($order);
+
         $subscriptions = $this->subscriptionOptions->forOrder($order);
         foreach ($subscriptions as $subscriptionOptions) {
             $this->createSubscription($payment->customerId, $subscriptionOptions);
         }
     }
 
-    /**
-     * @param Observer $observer
-     * @return \Mollie\Api\Resources\Payment|null
-     */
-    private function getPayment(Observer $observer)
+    private function getPayment(OrderInterface $order)
     {
-        $payment = $observer->getData('mollie_payment');
-        if ($observer->hasData('mollie_order')) {
-            /** @var MollieOrder $mollieOrder */
-            $mollieOrder = $observer->getData('mollie_order');
-            $payment = $mollieOrder->payments()[0];
+        $transactionId = $order->getPayment()->getAdditionalInformation()['mollie_id'];
+        if (preg_match('/^ord_\w+$/', $transactionId)) {
+            $order = $this->mollieApi->orders->get($transactionId, ['embed' => 'payments']);
+
+            return $order->payments()->offsetGet(0);
         }
 
-        return $payment;
+        return $this->mollieApi->payments->get($transactionId);
     }
 
     private function createSubscription(string $customerId, SubscriptionOption $subscriptionOptions)

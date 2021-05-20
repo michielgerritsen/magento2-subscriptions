@@ -8,8 +8,8 @@
     <event name="catalog_product_save_after">
         <observer name="mollie_subscriptions_update_subscription_product_price" instance="Mollie\Subscriptions\Observer\CatalogProductSaveAfter\UpdateSubscriptionProduct"/>
     </event>
-    <event name="mollie_process_response">
-        <observer name="mollie_create_subscription" instance="Mollie\Subscriptions\Observer\MollieProcessResponse\CreateSubscriptions" />
+    <event name="mollie_process_transaction_end">
+        <observer name="mollie_create_subscription" instance="Mollie\Subscriptions\Observer\MollieProcessTransactionEnd\CreateSubscriptions" />
     </event>
     <event name="checkout_allow_guest">
         <observer name="mollie_subscriptions_force_customer_login" instance="Mollie\Subscriptions\Observer\CheckoutAllowGuest\ForceCustomerLoginWhenSubscriptionItemInCart" />
