@@ -25,6 +25,7 @@ class Config
     const XML_PATH_EXTENSION_ENABLE = 'mollie_subscriptions/general/enable';
     const XML_PATH_EXTENSION_SHIPPING_METHOD = 'mollie_subscriptions/general/shipping_method';
     const XML_PATH_DEBUG = 'mollie_subscriptions/general/debug';
+    const XML_PATH_ADD_TO_CART_TEXT = 'mollie_subscriptions/general/add_to_cart_text';
     const MODULE_SUPPORT_LINK = 'https://www.magmodules.eu/help/%s';
 
     /**
@@ -181,5 +182,15 @@ class Config
             self::MODULE_SUPPORT_LINK,
             $this->getExtensionCode()
         );
+    }
+
+    /**
+     * @param null|int|string $storeId
+     * @param string $scope
+     * @return string|null
+     */
+    public function getAddToCartText($storeId = null, $scope = ScopeInterface::SCOPE_STORE)
+    {
+        return $this->getStoreValue(static::XML_PATH_ADD_TO_CART_TEXT, $storeId, $scope);
     }
 }
