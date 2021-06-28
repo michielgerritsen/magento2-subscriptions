@@ -80,6 +80,7 @@ class SubscriptionResponse
             'customer_name' => $this->getFullName(),
             'amount' => $this->subscription->amount->value,
             'mode' => $this->subscription->mode,
+            'next_payment_date' => $this->subscription->nextPaymentDate,
             'status' => $this->subscription->status,
             'description' => $this->subscription->description,
             'created_at' => $this->subscription->createdAt,

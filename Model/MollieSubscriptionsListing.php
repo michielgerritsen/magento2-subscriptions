@@ -8,10 +8,12 @@ namespace Mollie\Subscriptions\Model;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
+use Magento\Customer\Api\Data\CustomerInterfaceFactory;
 use Magento\Framework\Api\SearchCriteriaBuilderFactory;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Ui\Component\Listing;
 use Mollie\Api\Resources\Subscription;
+use Mollie\Api\Resources\SubscriptionCollection;
 use Mollie\Payment\Api\Data\MollieCustomerInterface;
 use Mollie\Payment\Api\MollieCustomerRepositoryInterface;
 use Mollie\Payment\Model\Mollie;
@@ -28,6 +30,11 @@ class MollieSubscriptionsListing extends Listing
      * @var SearchCriteriaBuilderFactory
      */
     private $searchCriteriaBuilderFactory;
+
+    /**
+     * @var CustomerInterfaceFactory
+     */
+    private $customerFactory;
 
     /**
      * @var CustomerRepositoryInterface
@@ -58,6 +65,7 @@ class MollieSubscriptionsListing extends Listing
         ContextInterface $context,
         Mollie $mollieModel,
         SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory,
+        CustomerInterfaceFactory $customerFactory,
         CustomerRepositoryInterface $customerRepository,
         MollieCustomerRepositoryInterface $mollieCustomerRepository,
         array $components = [],
@@ -66,6 +74,7 @@ class MollieSubscriptionsListing extends Listing
         parent::__construct($context, $components, $data);
         $this->mollieModel = $mollieModel;
         $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
+        $this->customerFactory = $customerFactory;
         $this->customerRepository = $customerRepository;
         $this->mollieCustomerRepository = $mollieCustomerRepository;
     }
@@ -126,10 +135,10 @@ class MollieSubscriptionsListing extends Listing
             }
         }
 
-        return null;
+        return $this->customerFactory->create();
     }
 
-    private function parsePreviousNext(\Mollie\Api\Resources\SubscriptionCollection $result)
+    private function parsePreviousNext(SubscriptionCollection $result)
     {
         if ($result->hasNext()) {
             $this->next = $this->parseLink($result->_links->next->href);
